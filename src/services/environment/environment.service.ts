@@ -12,7 +12,8 @@ export class EnvironmentService {
     constructor() {
         console.log(`${_env}`);
         this.env = Object.freeze(_env); // making env object to be immutable
-        console.log(this.get('CUR_ENV'));
+
+        console.log(this.env);
         
     }
 
