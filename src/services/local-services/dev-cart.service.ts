@@ -24,19 +24,19 @@ export class DevCartService {
     constructor(private mainController: MainApiService) { }
 
 
-    public async getCartProducts(): Promise<CartProduct[]> {
-        try {
-            // if pass T.O update wishListProducts
-            if (this.shouldeGetUpdatedList(this.lastProductsRequestTimeStamp)) {
-                this.cartProducts = await this.mainController.getUserCart();
-                this.toProductMap(this.cartProducts)
-                this.setLastProductsRequestTimeStamp();
-            }
-        } catch (e) {
-            console.log(e);
-        }
-        return 
-    }
+    // public async getCartProducts(): Promise<CartProduct[]> {
+    //     try {
+    //         // if pass T.O update wishListProducts
+    //         if (this.shouldeGetUpdatedList(this.lastProductsRequestTimeStamp)) {
+    //             this.cartProducts = await this.mainController.getUserCart();
+    //             this.toProductMap(this.cartProducts)
+    //             this.setLastProductsRequestTimeStamp();
+    //         }
+    //     } catch (e) {
+    //         console.log(e);
+    //     }
+    //     return 
+    // }
 
 
     private addPoductToMap(key: ProductMapKey,product: CartProduct) {
