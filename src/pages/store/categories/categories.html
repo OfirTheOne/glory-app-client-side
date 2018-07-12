@@ -1,0 +1,28 @@
+
+<ion-header>
+  <ion-navbar>
+      <ion-buttons right>
+          <button disabled left ion-button icon-only menuToggle>
+            <ion-icon name="menu" class="demo-icon-center-title"></ion-icon>
+          </button>
+        </ion-buttons>
+        <ion-title text-center>GLORY</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+<ion-navbar>
+<ion-title text-center>{{view}}</ion-title>
+</ion-navbar>
+
+  <ion-list padding>
+      <button ion-item *ngFor="let cat of categoriesList"
+      (click)="goToPage({category: cat.name,view: view})">
+        <ion-avatar item-start>
+          <img src="{{cat.avatarPath}}">
+        </ion-avatar>
+        <h2>{{cat.name}}</h2>
+      </button>
+    </ion-list>
+</ion-content>

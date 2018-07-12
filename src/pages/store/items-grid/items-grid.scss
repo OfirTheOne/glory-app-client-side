@@ -1,0 +1,95 @@
+page-items-grid {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+    ion-icon.demo-icon-center-title {
+      font-size: 6rem !important;
+    }
+  
+    ion-toolbar#sub-toolbar {
+      border-top: 3px solid color($colors, light);
+      border-bottom: 3px solid color($colors, light);  
+    }
+    ion-card {
+      img {
+        height: 165px;
+  
+      }
+      box-shadow: none !important;
+    }
+  
+  
+  
+  
+  
+    // set the style of the item card
+    ion-card, .card-md {
+      // set the size and margin of the item card
+      margin: 2% auto;
+      width: 85%;
+      ion-card-content {
+        ion-col {
+          .item-block {
+            min-height: 3.5rem;
+            div.input-wrapper {
+              overflow: unset !important;
+            }
+          }
+          div {
+            height: 3vh !important;
+          }
+          ion-icon[name="heart"] ,ion-icon[name="heart-outline"] {
+            font-size: 1.5em;
+          }
+  
+          > button {
+            height: 2.6vh !important;
+            font-size: 1.8rem !important;
+  
+            > span {
+              height: 3vh !important;
+  
+            }
+          }
+                // change the font size of the text inside the item card
+  
+          span.item-price {
+            font-size: 2.2vh !important;          
+          }
+          span.item-description{
+            font-size: 2.4vh !important;
+            color: gray;
+  
+          }
+        }
+      }
+  
+  
+    }
+  
+  
+  
+    // change the font size inside the 'Sort By' select element
+    ion-label {
+      margin: 18px 8px 8px 0 !important;
+      font-size: 0.8em;
+    }
+  
+    // change the padding of the box inside the select in the toolbar
+    ion-item.toolbar-select {
+      padding-left: 10px;
+    }
+  
+    // set the style of the floating 'go to top' button
+    .to-top-float-btn {
+      //background: none;
+      margin: 3%;
+      position: fixed;
+      bottom: 12%;
+      right: 0;
+      z-index: 100;
+      background-color: transparent;
+      ion-icon {
+        font-size: 3em;
+      }
+    }
+  }
+  

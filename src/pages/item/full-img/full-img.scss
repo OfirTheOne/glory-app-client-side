@@ -1,0 +1,24 @@
+page-full-img {
+    .imgContainer {
+        display: inline-block !important;
+        width: 100% !important;
+        height: 100% !important;
+        position: absolute;
+        .iconPositioner {
+            z-index: 1;
+            width: 5%;
+            height: 5%;
+            position: absolute !important;
+            right: 10px !important;
+            top: 10px !important;
+            
+            ion-icon {
+                font-size: 2rem;
+            }
+
+        }
+    }
+
+    
+
+}

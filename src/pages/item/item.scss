@@ -1,0 +1,29 @@
+page-item {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+    ion-icon.demo-icon-center-title {
+      font-size: 2rem !important;
+    }
+    ion-slides {
+      height: 50vh;
+    }
+    .swiper-slide img {
+      max-height: none;
+    }
+  
+    p.price-text ,p.description-text {
+      font-size: 1.8rem;
+    }
+  
+    ion-img {
+      contain: none;
+      display: block;
+      height: 48vh !important;
+      object-fit: cover;
+      .img-loaded {
+        padding: 0 !important;
+  
+      }
+  
+    }
+  }
+  

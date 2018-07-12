@@ -1,0 +1,95 @@
+<ion-header>
+  <ion-navbar>
+    <ion-buttons left>
+      <button ion-button icon-only (click)="onExit(false)">
+        <ion-icon name="arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons right>
+      <button disabled left ion-button icon-only>
+        <ion-icon name="arrow-back" class="demo-icon-center-title"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title text-center>GLORY</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  <ion-grid>
+    <ion-row padding-top>
+      <ion-col text-center>
+        <span ion-text class="signin-title">Sign in with Social Media</span>
+      </ion-col>
+    </ion-row>
+    <ion-row class="social-media-buttons-row">
+      <ion-col col-4>
+        <button full ion-button color="googlePlusRed" (click)="socialSignIn()">
+          <ion-icon name="logo-google"></ion-icon>
+        </button>
+      </ion-col>
+      <ion-col col-4>
+        <button full ion-button color="facebookBlue" (click)="socialSignIn()">
+          <ion-icon name="logo-facebook"></ion-icon>
+        </button>
+      </ion-col>
+      <ion-col col-4>
+        <button full ion-button color="linkedinBlue" >
+          <ion-icon name="logo-linkedin"></ion-icon>
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <!-- sign in form -->
+  <form #f="ngForm" (ngSubmit)="onSignIn(f)">
+  <ion-grid>
+    <ion-row padding-top>
+      <ion-col col-5>
+        <hr> </ion-col>
+      <ion-col text-center>
+        <span col-2>OR</span>
+      </ion-col>
+      <ion-col col-5>
+        <hr> </ion-col>
+    </ion-row>
+    <ion-row pedding-top>
+      <ion-col offset-2 col-8>
+        <ion-item>
+          <ion-label floating>Email</ion-label>
+          <ion-input full type="email" name="email" ngModel required></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label floating>Password</ion-label>
+          <ion-input full type="password" name="password" ngModel required></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col offset-2 col-8>
+        <button full ion-button color="dark" 
+                [disabled]="!f.valid" type="submit">Sign in</button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-12 text-center>
+        <span color="_gray" underlined ion-text>Forget your password ? </span>
+      </ion-col>
+    </ion-row>
+    <ion-row padding-top>
+      <ion-col col-12 text-center>
+        <hr>
+      </ion-col>
+    </ion-row>
+    <ion-row padding-top>
+      <ion-col col-12 text-center>
+        <span>Dont have an account ?
+          <br>
+          <span>Sign up</span>
+        </span>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</form>
+</ion-content>

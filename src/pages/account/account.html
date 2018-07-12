@@ -1,0 +1,90 @@
+<ion-header>
+  <ion-navbar>
+    <ion-buttons left>
+      <button left ion-button icon-only menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons right>
+      <button disabled left ion-button icon-only menuToggle>
+        <ion-icon name="menu" class="demo-icon-center-title"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title text-center>GLORY</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+
+<ion-content padding *ngIf="isUserSignedIn() === false; else signIn;">
+  <ion-grid>
+    <ion-row>
+      <ion-col text-center col-12>
+        <ion-title>
+          Join us
+        </ion-title>
+      </ion-col>
+      <ion-col text-center offset-4 col-4>
+        <ion-icon color="light" class="blank-user-icon" name="contact"></ion-icon>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col text-center offset-2 col-8>
+        <span ion-text>Come on in</span>
+      </ion-col>
+    </ion-row>
+    <ion-row align-items-center>
+      <ion-col offset-2 col-8>
+        <button full ion-button (click)="onGotoSignInPage()"> Sign In </button>
+      </ion-col>
+    </ion-row>
+    <ion-row align-items-center>
+      <ion-col offset-2 col-8>
+        <button full ion-button (click)="onGotoSignUpPage()"> Sign Up </button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+<ng-template #signIn>
+  <ion-content>
+    <ion-toolbar class="account-toolbar">
+        <ion-grid>
+      <ion-row>
+        <ion-col><span text-center ion-text>Hello, User</span></ion-col>
+      </ion-row>
+      </ion-grid>
+    </ion-toolbar>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-list>
+            <button ion-item>
+              <ion-icon name="clipboard" item-start></ion-icon>
+              <h3>My orders</h3>
+            </button>
+            <button ion-item>
+              <ion-icon name="list" item-start></ion-icon>
+              <h3>My details</h3>
+            </button>
+            <button ion-item>
+              <ion-icon name="home" item-start></ion-icon>
+              <h3>Shipping address</h3>
+            </button>
+          </ion-list>
+          <ion-list>
+            <button ion-item (click)="onLogOut()">
+              <ion-icon name="exit" item-start></ion-icon>
+              <h3>Log out</h3>
+            </button>
+            <button ion-item>
+                <ion-icon name="document" item-start></ion-icon>
+                <h3>Terms and conditions</h3>
+              </button>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-content>
+  </ng-template>

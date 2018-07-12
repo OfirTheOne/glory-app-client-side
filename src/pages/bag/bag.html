@@ -1,0 +1,100 @@
+
+<ion-header>
+  <ion-navbar>
+    <ion-title text-center>GLORY</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-grid *ngIf="isUserSign === false; else userSign;">
+        <ion-row>
+          <ion-col text-center col-12>
+            <ion-title>
+                Filling empty ..
+              </ion-title>
+          </ion-col>
+          <ion-col text-center offset-4 col-4>
+              <ion-icon color="light" class="blank-user-icon" name="contact"></ion-icon>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col  text-center offset-2 col-8>
+              <span ion-text>Join in to get your bag</span>
+          </ion-col>
+        </ion-row>
+        <ion-row align-items-center>
+          <ion-col offset-2 col-8>
+            <button full ion-button (click)="onGotoSignInPage()"> Sign In </button>
+          </ion-col>
+        </ion-row>
+        <ion-row align-items-center>
+            <ion-col offset-2 col-8>
+                <button full ion-button (click)="onGotoSignUpPage()"> Sign Up </button>
+            </ion-col>
+        </ion-row>
+   </ion-grid>
+  
+  <ng-template #userSign>
+
+    <ng-template #cartEmpty>
+      <h2 text-center>Your cart is empty</h2>
+    </ng-template>
+    <!-- HERE item card -->
+    <ion-card padding-0 *ngIf="cart.length > 0; else cartEmpty;">
+      <ion-list>
+        <ion-item-sliding *ngFor="let cartProduct of cart; let i = index">
+          <ion-item>
+            <ion-thumbnail item-start>
+              <img src="{{cartProduct.product.imagePath}}">
+            </ion-thumbnail>
+            <ion-row>
+              <ion-col>
+                <h2>{{cartProduct.product.description}}</h2>
+
+              </ion-col>
+            </ion-row>
+            <hr/>
+            <ion-row>
+              <ion-col>
+                <p>price:  {{cartProduct.product.price}}</p>
+                <p>size: {{cartProduct.size}}</p>
+              </ion-col>
+              <ion-col>
+                <!-- <count-tool [minLimit]="1"[maxLimit]="10" [count]="cartItem.amount"
+                            (valueIncrement)="addProductToCart(cartItem)"
+                            (valueDecrement)="removeProductFromCart(cartItem)">
+                </count-tool> -->
+                <!--<button ion-button clear >View</button>-->
+              </ion-col>
+            </ion-row>
+
+          </ion-item>
+          <ion-item-options side="left">
+            <button ion-button color="primary" (click)="removeProductFromCart(cartProduct)">
+              <ion-icon name="trash"></ion-icon>
+              delete
+            </button>
+          </ion-item-options>
+        </ion-item-sliding>
+
+      </ion-list>
+    </ion-card>
+    <hr>
+  </ng-template>
+
+</ion-content>
+
+<ion-footer no-border>
+  <ion-toolbar *ngIf="isUserSign === true;">
+    <ion-row class="vertical-align-content">
+      <ion-col>
+        <ion-title>Total : {{totalCartCost}} </ion-title>
+
+      </ion-col>
+      <ion-col>
+        <button ion-button outline round>Check Out</button>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-footer>

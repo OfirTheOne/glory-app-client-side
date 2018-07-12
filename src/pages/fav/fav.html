@@ -1,0 +1,76 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title text-center>GLORY</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+
+<ng-template #userSign>
+  <ng-template #noFavorites>
+    <h2 text-center>Start your wish list</h2>
+  </ng-template>
+
+  <!-- <ion-grid class="img-grid" *ngIf="favProducts.length > 0; else noFavorites;"> -->
+    <div *ngIf="favProducts.length > 0; else noFavorites;">
+
+      <ion-navbar color="transparent">
+        <ion-title text-center>Your saved items</ion-title>
+      </ion-navbar>
+      <ion-list>
+        <ion-item *ngFor="let product of favProducts; let i = index">
+          <ion-thumbnail item-start>
+            <img src="{{product.imagePath}}" (click)="onViewItem(product)">
+          </ion-thumbnail>
+          <h2>{{product.price}}</h2>
+          <p>{{product.description}}</p>
+          <button ion-button clear item-end (click)="onViewItem(product)">View</button>
+        </ion-item>
+      </ion-list>
+    </div>
+
+    <!-- <ion-row justify-content-center *ngFor="let product of favProducts; let i = index">
+      <ion-col offset-4 col-4 align-self-center >
+        <div class="img-container">
+          <ion-img align-self-center src="{{product.imagePath}}" (click)="onViewItem(product)"></ion-img>
+          <div class="img-icon-container">
+            <div class="img-icon" (click)="removeProductFromWish(product)">
+              <ion-icon name="heart"></ion-icon>
+            </div>
+          </div>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid> -->
+</ng-template>
+
+<ion-grid *ngIf="isUserSignedIn() === false; else userSign;">
+  <ion-row>
+    <ion-col text-center col-12>
+      <ion-title>
+        Start to wish !
+      </ion-title>
+    </ion-col>
+    <ion-col text-center offset-4 col-4>
+        <ion-icon color="light" class="blank-user-icon" name="contact"></ion-icon>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col  text-center offset-2 col-8>
+        <span ion-text>Join in to start your wish list</span>
+    </ion-col>
+  </ion-row>
+  <ion-row align-items-center>
+    <ion-col offset-2 col-8>
+      <button full ion-button (click)="onGotoSignInPage()"> Sign In </button>
+    </ion-col>
+  </ion-row>
+  <ion-row align-items-center>
+      <ion-col offset-2 col-8>
+          <button full ion-button (click)="onGotoSignUpPage()"> Sign Up </button>
+      </ion-col>
+  </ion-row>
+</ion-grid>
+  
+</ion-content>

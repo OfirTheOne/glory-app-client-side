@@ -1,0 +1,15 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title text-center>GLORY</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding class="card-background-page">
+  <ion-searchbar color="light_gray" animated="true" (input)="getProducts($event)"></ion-searchbar>
+
+  <ion-card *ngFor="let view of viewBy"
+  [navPush]="categoriesPage" [navParams]="view">
+    <img />
+    <div class="card-title">{{view}}</div>
+  </ion-card>
+</ion-content>

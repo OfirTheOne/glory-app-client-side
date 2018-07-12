@@ -1,0 +1,16 @@
+page-sign-in {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+
+    ion-grid {
+        ion-row{
+            .signin-title {
+                font-size: 1.8rem !important;
+            }
+        }
+        ion-row.social-media-buttons-row {
+            ion-icon {
+                font-size: 2.5rem;
+            }
+        }
+    }
+}

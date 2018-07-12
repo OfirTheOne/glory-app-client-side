@@ -1,0 +1,49 @@
+
+<ion-menu [content]="nav" persistent="true">
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Menu</ion-title>
+      </ion-toolbar>
+    </ion-header>
+  
+    <ion-content padding-top>
+      <ion-list>
+        <!--<ion-list-header></ion-list-header>-->
+        <button ion-item >
+          Your Account
+        </button>
+        <button ion-item >
+          Setting
+        </button>
+        <button ion-item >
+          About GLORY
+        </button>
+      </ion-list>
+  
+  <ion-toolbar class="social-network-btns">
+  <ion-row>
+    <ion-col col-2></ion-col>
+    <ion-col col-2>
+      <button icon-only ion-button clear color="dark"><ion-icon name="logo-facebook"></ion-icon></button>
+    </ion-col>
+    <ion-col col-2>
+      <button icon-only ion-button clear color="dark"><ion-icon name="logo-twitter"></ion-icon></button>
+    </ion-col>
+    <ion-col col-2>
+      <button icon-only ion-button clear color="dark"><ion-icon name="logo-instagram"></ion-icon></button>
+    </ion-col>
+    <ion-col col-2>
+      <button icon-only ion-button clear color="dark"><ion-icon name="logo-pinterest"></ion-icon></button>
+    </ion-col>
+  </ion-row>
+        </ion-toolbar>
+    </ion-content>
+  
+    <ion-footer>
+      <ion-toolbar text-center>
+        <p>GLORY inc.</p>
+      </ion-toolbar>
+    </ion-footer>
+  </ion-menu>
+  
+<ion-nav #nav [root]="rootPage"></ion-nav>

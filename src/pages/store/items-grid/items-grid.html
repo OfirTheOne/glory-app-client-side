@@ -1,0 +1,89 @@
+<ion-header>
+  <ion-navbar>
+    <ion-buttons right>
+      <button disabled left ion-button icon-only>
+        <ion-icon name="arrow-back" class="demo-icon-center-title"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title text-center>GLORY</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content no-padding #pageContent (ionScroll)="scrollHandler($event)">
+
+  <!-- toolbars top of the page -->
+  <ion-toolbar no-padding>
+    <ion-title ion-text text-center text-capitalize>{{view}} - {{category}}</ion-title>
+  </ion-toolbar>
+  <ion-toolbar no-padding id="sub-toolbar">
+    <ion-row no-margin>
+      <ion-col col-1 no-margin no-padding></ion-col>
+      <ion-col col-4 no-padding>
+        <ion-item class="toolbar-select">
+          <ion-label>Sort</ion-label>
+          <ion-select [(ngModel)]="Sortby">
+            <ion-option value="new">Newest In</ion-option>
+            <ion-option value="pop">Most Popular</ion-option>
+            <ion-option value="p-hl">Price (high to low)</ion-option>
+            <ion-option value="p-lh">Price (low to high)</ion-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+      <ion-col col-2 no-margin no-padding></ion-col>
+      <ion-col col-4 no-padding>
+        <!--<button color="dark" ion-button full>Full Button</button>-->
+        <ion-item class="toolbar-select">
+          <ion-label>Filter</ion-label>
+          <ion-select [(ngModel)]="Filterby">
+            <ion-option value="price">Price</ion-option>
+            <ion-option value="size">Size</ion-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+
+  <!-- grid of item cards -->
+  <ion-grid>
+    <ion-row>
+      <ion-col col-6 *ngFor="let product of dispalyProducts">
+        <ion-card>
+          <img src="{{product.imagePath}}" (load)="onLoadIamge()" (click)="onGoToProductPage(product)">
+
+          <ion-card-content no-padding class="item-card-content">
+            <ion-row padding-top>
+              <ion-col col-8 no-padding>
+                <!-- price -->
+                <ion-item>
+                  <span ion-text class="item-price">
+                    <ion-icon name="pricetag"></ion-icon>
+                    {{product.price}}
+                  </span>
+                </ion-item>
+              </ion-col>
+              <ion-col col-4 no-padding>
+                <!-- fav icon -->
+                <button [disabled]="!isUserSign" item-end clear ion-button
+                        (click)="toggleWishState(product)">
+                  <ion-icon color="dark" [name]="isWish(product) ? 'heart' : 'heart-outline'"></ion-icon>
+                </button>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col offset-1 col-10>
+                <span ion-text class="item-description">{{product.description}}</span>
+              </ion-col>
+            </ion-row>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <!-- floating 'up' button -->
+  <button class="to-top-float-btn" ion-button clear icon-only #toTopBtn (click)="scrollToTop()">
+    <ion-icon name="arrow-dropup-circle" large color="dark"></ion-icon>
+  </button>
+
+</ion-content>

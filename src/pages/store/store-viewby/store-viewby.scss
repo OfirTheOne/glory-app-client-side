@@ -1,0 +1,55 @@
+page-store-viewby {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+  
+    .searchbar-input {
+      border-radius: 15px !important;
+      background-color: color($colors, light_gray) !important;
+      height: 6vh !important;
+      box-shadow: none !important;
+    }
+  
+    .card-background-page {
+  
+      ion-searchbar {
+        border-bottom: none;
+        background: transparent !important;
+      }
+  
+  
+      ion-card {
+        position: relative;
+        text-align: center;
+      }
+  
+      ion-card > img {
+        flex-shrink: 0;
+        height: 18vh;  
+      }
+  
+      .card-title {
+        background-color: gainsboro;
+        border-bottom: solid;
+        border-bottom-color: white;
+        border-top:solid;
+        border-top-color: white;
+        position: absolute;
+        top: 36%;
+        font-size: 2.0em;
+        width: 100%;
+        font-weight: bold;
+        color: #fff;
+      }
+  
+      .card-subtitle {
+        margin-top: 1.5vh;
+        font-size: 1.0em;
+        position: absolute;
+        top: 52%;
+        width: 100%;
+        color: #fff;
+      }
+  
+    }
+  
+  }
+  

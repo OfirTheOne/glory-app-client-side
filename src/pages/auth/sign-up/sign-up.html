@@ -1,0 +1,131 @@
+<ion-header>
+
+  <ion-navbar>
+      <ion-buttons left>
+        <button ion-button icon-only (click)="onExit()">
+            <ion-icon name="arrow-back"></ion-icon>
+          </button>
+      </ion-buttons>
+      <ion-buttons right>
+          <button disabled left ion-button icon-only>
+            <ion-icon name="arrow-back" class="demo-icon-center-title"></ion-icon>
+          </button>
+        </ion-buttons>
+      <ion-title text-center>GLORY</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+<!-- the grid of social media buttons -->
+<ion-grid>
+  <ion-row>
+    <ion-col text-center>
+      <span class="signup-title">Sign up with</span>
+    </ion-col>
+  </ion-row>
+  <ion-row class="social-media-buttons-row">
+    <ion-col offset-2 col-8>
+      <button full ion-button color="googlePlusRed">
+        <ion-icon name="logo-google"></ion-icon>
+      </button>
+    </ion-col>
+  </ion-row>
+  <ion-row class="social-media-buttons-row">
+    <ion-col offset-2 col-8>
+      <button full ion-button color="facebookBlue">
+        <ion-icon name="logo-facebook"></ion-icon>
+      </button>
+    </ion-col>
+  </ion-row>
+  <ion-row class="social-media-buttons-row">
+    <ion-col offset-2 col-8>
+      <button full ion-button color="linkedinBlue">
+        <ion-icon name="logo-linkedin"></ion-icon>
+      </button>
+    </ion-col>
+  </ion-row>
+  <ion-row text-center>
+    <ion-col offset-1 col-10>
+      <p ion-text>
+        Quick and efficient signup with any of your social media accounts
+      </p>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col col-5>
+      <hr>
+    </ion-col>
+    <ion-col col-2 text-center>
+      <span bold ion-text>OR</span>
+    </ion-col>
+    <ion-col col-5>
+      <hr>
+    </ion-col>
+  </ion-row>
+
+</ion-grid>
+
+<!-- the grid of email sign up form -->  
+<form #f="ngForm" (ngSubmit)="onSignUp(f)" >
+<ion-grid>
+  <ion-row>
+        <ion-col offset-1 col-10>
+          <span ion-text class="signup-title">Sign up using your email address</span>
+        </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col offset-1 col-10>
+      <ion-item>
+        <ion-label floating>Email Address</ion-label>
+        <ion-input type="email" name="email" ngModel></ion-input>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col offset-1 col-10>
+      <ion-item>
+        <ion-label floating>Password</ion-label>
+        <ion-input type="password" name="password" ngModel></ion-input>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col offset-1 col-10>
+      <ion-item>
+        <ion-label floating>Confirm Password</ion-label>
+        <ion-input type="password" name="conPasword" ngModel></ion-input>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col offset-1 col-5>
+      <ion-item>
+        <ion-label floating>First Name</ion-label>
+        <ion-input type="text" name="firstName" ngModel></ion-input>
+      </ion-item>
+    </ion-col>
+    <ion-col col-5>
+      <ion-item>
+        <ion-label floating>Last Name</ion-label>
+        <ion-input type="text" name="lastName" ngModel></ion-input>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col offset-1 col-10>
+      <ion-item>
+        <ion-label floating>Birth date</ion-label>
+        <ion-datetime displayFormat="MM/DD/YYYY" name="bDate" [(ngModel)]="myDate"></ion-datetime>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col offset-2 col-8>
+      <button [disabled]="!f.valid" full color="dark" ion-button type="submit">Sign up</button>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+</form>
+</ion-content>
