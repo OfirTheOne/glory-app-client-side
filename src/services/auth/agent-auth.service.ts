@@ -42,21 +42,24 @@ export class AgentAuthService {
     /************************ public ************************/
 
     // sign in action.
-    public async onSignIn(provider: Provider , params?) {
+    public async onSignIn(provider: Provider, params?) {
         this.setStrategy(provider);
         if (this.authStrategy == undefined) {
             throw new Error('Auth service is not initialized');
         } else {
-            const res = await this.authStrategy.onSignIn(params);
-            this.sdm.declareSignData({   
-                providerName: this.authStrategy.getProviderName(), 
-                token: this.authStrategy.getToken() 
-            });
-            console.log(`onSignIn authStrategy ${this.authStrategy.getToken()}`);
-            console.log(`onSignIn sdm ${this.sdm.getDeclaredSignData().token}`);
-
-            this.userStatusChangeEvent.next();
-            return res;
+            try {
+                const res = await this.authStrategy.onSignIn(params);
+                this.sdm.declareSignData({
+                    providerName: this.authStrategy.getProviderName(),
+                    token: this.authStrategy.getToken()
+                });
+                console.log(`onSignIn authStrategy ${this.authStrategy.getToken()}`);
+                console.log(`onSignIn sdm ${this.sdm.getDeclaredSignData().token}`);
+                this.userStatusChangeEvent.next();
+                return res;
+            } catch (error) {
+                console.log(error);
+            }
         }
     }
 
@@ -65,10 +68,15 @@ export class AgentAuthService {
         if (this.authStrategy == undefined) {
             throw new Error('Auth service is not initialized');
         } else {
-            this.sdm.undeclareSignData();
-            const res = await this.authStrategy.onSignOut();
-            this.userStatusChangeEvent.next();
-            return res;
+            try {
+                this.sdm.undeclareSignData();
+                const res = await this.authStrategy.onSignOut();
+                this.userStatusChangeEvent.next();
+                return res;
+                
+            } catch (error) {
+                console.log(error);
+            }
         }
     }
 
@@ -85,11 +93,11 @@ export class AgentAuthService {
         } else {
             signStatus = this.authStrategy.isSignIn() && (this.authStrategy.getProfile() != undefined);
             console.log(`from isSignIn - ${JSON.stringify(this.authStrategy.getProfile())}`);
-            if(signStatus) {
+            if (signStatus) {
                 const oldToken = this.sdm.getDeclaredSignData().token;
                 const newToken = this.authStrategy.getToken();
-                
-                if(oldToken != newToken) {
+
+                if (oldToken != newToken) {
                     this.sdm.signToken(newToken);
                 }
             }
@@ -98,10 +106,10 @@ export class AgentAuthService {
     }
 
     // update the signed in user data to the db.
-    public async onUpdateUserData(userData: 
+    public async onUpdateUserData(userData:
         { firstName: string, lastName: string, gender: string, birthDate: any }): Promise<boolean> {
         try {
-            if(this.isSignIn()) {
+            if (this.isSignIn()) {
                 let res = await this.authStrategy.onUpdateUserData(userData);
                 console.log(res);
                 return true;
@@ -150,9 +158,9 @@ export class AgentAuthService {
     /* used once in the c'tor */
     private waitForAllResInit() {
         let g_init = false;
-        let f_init = 
-            this.environment.isProd()? 
-                false : 
+        let f_init =
+            this.environment.isProd() ?
+                false :
                 true;
 
         this.google.authResInitEventSubscribe(async () => {
@@ -172,14 +180,14 @@ export class AgentAuthService {
     private async chackIsAuthResInit(g: boolean, f: boolean, c: boolean) {
         if (g && f && c) {
             try {
-                if(this.sdm.isDeclared()) {
+                if (this.sdm.isDeclared()) {
                     await this.getUserDataOnInit();
 
                 }
-            } catch(e) {
+            } catch (e) {
                 console.log(e);
                 // removing data from the L.S only if the request returned unauthorized error
-                if('status' in e && e.status == 401) {
+                if ('status' in e && e.status == 401) {
                     this.sdm.undeclareSignData();
                 }
             }
@@ -253,11 +261,11 @@ class SignDeclaretionManeger {
     private readonly providerKeyName = 'sign_p';
     private readonly tokenKeyName = 'sign_t';
 
-    public declareSignData(signData: {providerName: string, token: string}): void {
+    public declareSignData(signData: { providerName: string, token: string }): void {
         this.signToken(signData.token);
         this.signProvider(signData.providerName);
     }
- 
+
     public undeclareSignData(): void {
         localStorage.removeItem(this.providerKeyName);
         localStorage.removeItem(this.tokenKeyName);
@@ -267,9 +275,9 @@ class SignDeclaretionManeger {
         return localStorage.getItem(this.providerKeyName) != undefined;
     }
 
-    public getDeclaredSignData(): {providerName: string, token: string} {
+    public getDeclaredSignData(): { providerName: string, token: string } {
         return {
-            providerName: localStorage.getItem(this.providerKeyName), 
+            providerName: localStorage.getItem(this.providerKeyName),
             token: localStorage.getItem(this.tokenKeyName)
         };
     }
@@ -278,7 +286,7 @@ class SignDeclaretionManeger {
     public signToken(token: string): void {
         localStorage.setItem(this.tokenKeyName, token);
     }
-    
+
     public signProvider(providerName: string): void {
         localStorage.setItem(this.providerKeyName, providerName);
     }

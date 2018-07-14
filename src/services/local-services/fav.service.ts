@@ -1,13 +1,10 @@
 import { Injectable } from '@angular/core';
 import * as moment from 'moment';
 
-import { MainApiService } from '../main-api.service';
-
-import { Product } from '../../models/store-models/product.interface';
 import { AgentAuthService } from '../auth/agent-auth.service';
 import { FavApiService } from '../api-services/fav-api.service';
-import { ServerResponse } from '../../models/custom-auth-models/server-response.interface';
 
+import { Product } from '../../models/store-models/product.interface';
 
 /** 
  * This service store wish products and implement a sodu caching behavior.
@@ -23,8 +20,7 @@ export class FavService {
 
     constructor(
         private authService: AgentAuthService,
-        private favApi: FavApiService,
-        private mainController: MainApiService) { }
+        private favApi: FavApiService) { }
 
     // *********** shallow ids *********** //
 
@@ -147,95 +143,5 @@ export class FavService {
             array.push(newElement);
         }
     }
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-/*
-    async authGard(callback: (header, parameters?)=>Promise<any>, params? : any[]) {
-        try {
-            if (this.authService.isSignIn()) {
-                const header = this.authService.getAuthHeader();
-                const result =  await callback(header, ...params);
-                return result? result.data : undefined;
-            }
-        } catch (e) {
-            throw e;
-        }
-    }
-
-  */
-
-
-    // *** wish ***
-    //  async getUserWish(): Promise<{ wishList: string[] }> {
-    //     await this.authGard(this._)
-
-    //     try {
-    //         if (this.authService.isSignIn()) {
-    //             const header = this.authService.getAuthHeader()
-    //             const res = await this.favApi.getUserWish(header);
-    //             return res.data;
-    //         }
-    //     } catch (e) {
-    //         throw e;
-    //     }
-    // }
-
-
-    // async getUserWishProducts(): Promise<Product[]> {
-    //     try {
-    //         if (this.authService.isSignIn()) {
-    //             const header = this.authService.getAuthHeader()
-    //             const res = await this.favApi.getUserWishProducts(header);
-    //             return res.data;
-    //         }
-    //     } catch (e) {
-    //         throw e;
-    //     }
-    // }
-
-
-    // async addProductToWish(pid: string): Promise<void> {
-    //     try{
-    //         if (this.authService.isSignIn()) {
-    //             const header = this.authService.getAuthHeader();
-    //             await this.favApi.postProductsToWish(header, { pid });
-    //         }
-    //     } catch(e) {
-    //         throw e;
-    //     }
-    // }
-
-
-    // async _removeProductFromWish(pid: string): Promise<void> {
-    //     try {
-    //         if (this.authService.isSignIn()) {
-    //             const header = this.authService.getAuthHeader();
-    //             await this.favApi.deleteProductFromWish(header, pid);
-    //         }
-    //     } catch (e) {
-    //         throw e;
-    //     }
-    // }
-
-
-
 
 }

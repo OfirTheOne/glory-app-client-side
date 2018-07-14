@@ -1,6 +1,7 @@
 import { CategoriesPage } from './../categories/categories';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { viewBy } from '../../../data/viewby.data';
 
 /**
  * Generated class for the StoreViewbyPage page.
@@ -16,7 +17,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class StoreViewbyPage {
   categoriesPage = CategoriesPage;
-  viewBy = ['On Sale','New In','Catalog'];
+  viewBy = viewBy;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) { }
 

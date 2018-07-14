@@ -1,11 +1,10 @@
-import { CartApiService } from './../api-services/cart-api.service';
-import { AgentAuthService } from './../auth/agent-auth.service';
 import { Injectable } from '@angular/core';
 import * as moment from 'moment';
 
-import { MainApiService } from '../main-api.service';
+import { AgentAuthService } from './../auth/agent-auth.service';
+import { CartApiService } from './../api-services/cart-api.service';
+
 import { CartProduct } from '../../models/store-models/cart-product.interface';
-// import { Product } from '../../models/product.interface';
 
 /** 
  * This service store cart products and implement a sodu caching behavior.
@@ -19,8 +18,7 @@ export class CartService {
 
     constructor(
         private authService: AgentAuthService,
-        private cartApi: CartApiService,
-        private mainController: MainApiService) { }
+        private cartApi: CartApiService) { }
 
 
     public async getCartProducts(): Promise<CartProduct[]> {
@@ -90,7 +88,6 @@ export class CartService {
 
 
 
-
     // cache
 
     // when user signout
@@ -144,51 +141,6 @@ export class CartService {
         const timeOut = moment().add(this.updateTimeOut, 'seconds');
         const shoulde = moment(requestTimeStamp, 'seconds').isAfter(timeOut, 'seconds');
         return shoulde;
-    }
-
-
-
-
-
-
-
-
-    // *** cart ***
-    async _getUserCart(): Promise<CartProduct[]> {
-        try {
-            if (this.authService.isSignIn()) {
-                const header = this.authService.getAuthHeader()
-                const res = await this.cartApi.getUserCart(header);
-                console.log(res.data);
-                return res.data;
-            }
-        } catch (e) {
-            throw e;
-        }
-    }
-
-
-    async _addProductToCart(pid: string, size: string): Promise<void> {
-        try {
-            if (this.authService.isSignIn()) {
-                const header = this.authService.getAuthHeader()
-                await this.cartApi.postProductsToCart(header, { pid, size });
-            }
-        } catch (e) {
-            throw e;
-        }
-    }
-
-
-    async _removeProductFromCart(deleteParams: { pid: string, size: string }): Promise<void> {
-        try {
-            if (this.authService.isSignIn()) {
-                const header = this.authService.getAuthHeader()
-                await this.cartApi.deleteProductFromCart(header, deleteParams);
-            }
-        } catch (e) {
-            throw e;
-        }
     }
 
 }

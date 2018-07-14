@@ -48,14 +48,16 @@ import { CustomAuthStrategyService } from '../services/auth/custom-auth/custom-a
 import { FacebookAuthStrategyService } from '../services/auth/facebook-auth/facebook-auth.service';
 import { GoogleAuthStrategyService } from '../services/auth/google-auth/google-auth.service';
 
-import { FavService } from '../services/local-services/fav.service';
-import { CartService } from './../services/local-services/cart.service';
-// import { DevCartService } from './../services/local-services/dev-cart.service';
-
 import { HttpService } from '../services/api-services/http.service';
 import { CartApiService } from './../services/api-services/cart-api.service';
 import { FavApiService } from './../services/api-services/fav-api.service';
 import { ProductApiService } from './../services/api-services/product-api.service';
+
+import { ProductService } from './../services/local-services/product.service';
+import { FavService } from '../services/local-services/fav.service';
+import { CartService } from './../services/local-services/cart.service';
+// import { DevCartService } from './../services/local-services/dev-cart.service';
+
 
 @NgModule({
   declarations: [
@@ -118,6 +120,7 @@ import { ProductApiService } from './../services/api-services/product-api.servic
     CartApiService,
     MainApiService,
 
+    ProductService,
     FavService,
     CartService,
     // DevCartService,

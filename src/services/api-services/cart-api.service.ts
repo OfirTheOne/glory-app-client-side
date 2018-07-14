@@ -6,54 +6,39 @@ import { EnvironmentService } from './../environment/environment.service';
 
 import { ServerResponse } from './../../models/custom-auth-models/server-response.interface';
 import { CartProduct } from '../../models/store-models/cart-product.interface';
-import { Cart } from '../../models/store-models/cart.interface';
 
 @Injectable()
 export class CartApiService {
 
     private readonly curSubRoute = 'users/cart/';
+    private rootRoute: string;
 
-    constructor(private http: HttpService, private env: EnvironmentService) { }
-
-
-
-    async getUserCart(headers: HttpHeaders)
-        : Promise<ServerResponse<CartProduct[]>> {
-        console.log(`getUserCart(${headers})`);
-        const queryUrl = this.env.get('API_URL') + this.curSubRoute + 'products/';
-        try {
-            const res = await this.http.get<CartProduct[]>(queryUrl, headers);
-            console.log(res);
-            return res;
-        } catch (e) {
-            throw e;
-        }
-
+    constructor(private http: HttpService, private env: EnvironmentService) { 
+        this.rootRoute = this.env.get('API_URL');
     }
 
-    async postProductsToCart(headers: HttpHeaders, requestBody: { pid: string, size: string })
-        : Promise<void> {
+    async getUserCart(headers: HttpHeaders): Promise<ServerResponse<CartProduct[]>> {
+        console.log(`getUserCart(${headers})`);
+        const queryUrl = this.rootRoute + this.curSubRoute + 'products/';
+        const result = await this.http.get<CartProduct[]>(queryUrl, headers);
+        console.log(result);
+        return result;
+    }
+
+    async postProductsToCart(headers: HttpHeaders, requestBody: { pid: string, size: string }): Promise<void> {
         console.log(`postProductsToCart(${headers}, ${requestBody})`);
-        const queryUrl = this.env.get('API_URL') + this.curSubRoute;
-        try {
-            const res = await this.http.post(queryUrl, requestBody, headers);
-            console.log(res);
-        } catch (e) {
-            throw e;
-        }
+        const queryUrl = this.rootRoute + this.curSubRoute;
+        const result = await this.http.post(queryUrl, requestBody, headers);
+        console.log(result);
+
     }
 
     async deleteProductFromCart(headers: HttpHeaders, deleteParams: { pid: string, size: string }): Promise<void> {
         console.log(`deleteProductFromCart(${headers}, ${deleteParams})`);
-        const queryUrl = this.env.get('API_URL') + this.curSubRoute + 'q';
+        const queryUrl = this.rootRoute + this.curSubRoute + 'q';
         const params = new HttpParams({ fromObject: deleteParams });
-        try {
-            const res = await this.http.delete(queryUrl, headers, params);
-            console.log(res);
-        } catch (e) {
-            throw e;
-        }
+        const result = await this.http.delete(queryUrl, headers, params);
+        console.log(result);
+
     }
-
-
 }

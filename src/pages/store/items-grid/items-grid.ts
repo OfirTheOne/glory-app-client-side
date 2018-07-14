@@ -1,11 +1,11 @@
 import { AgentAuthService } from './../../../services/auth/agent-auth.service';
 import { LoadPage } from './../../load/load';
 import { Product } from './../../../models/store-models/product.interface';
-import { MainApiService } from './../../../services/main-api.service';
 import { FavService } from './../../../services/local-services/fav.service';
 import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController, Modal, Content, Button, NavOptions } from 'ionic-angular';
 import { ItemPage } from '../../item/item';
+import { ProductService } from '../../../services/local-services/product.service';
 
 /**
  * Generated class for the ItemsGridPage page.
@@ -44,16 +44,14 @@ export class ItemsGridPage {
     private modalCtrl: ModalController,
     private authService: AgentAuthService,
     private favService: FavService,
-    private mainApi: MainApiService
-  ) {
+    private prouctService: ProductService) {
   }
 
   async ionViewDidLoad() {
     console.log('ionViewDidLoad ItemsGridPage');
     this.loadedImages = 0;
-    //if(this.getDisplayProductAmount()) {
       this.laodingModal = this.showLoadingPage();
-    //}
+  
     this.hideTopPageBtn(); 
     await this.initProductsDisplay();
     if(this.getDisplayProductAmount() == 0) {
@@ -77,7 +75,7 @@ export class ItemsGridPage {
     let sort = 'p-desc'; // defaulte sort value
     
     try {
-      this.dispalyProducts = await this.mainApi.getFilteredProducts({ 
+      this.dispalyProducts = await this.prouctService.getFilteredProducts({ 
         category: this.category, 
         view: this.matchViewParamToServerTerms(this.view), 
         sort 
@@ -109,10 +107,8 @@ export class ItemsGridPage {
     return laodingModal;
   }
 
-  private isAllProductImagesLoaded(): boolean {
-    return this.loadedImages == this.dispalyProducts.length;
-  }
 
+  
   public onLoadIamge() {
     console.log(`onLoadIamge()`);
     this.loadedImages++;
@@ -126,6 +122,10 @@ export class ItemsGridPage {
       this.laodingModal.dismiss(navOp);
     }
 
+  }
+
+  private isAllProductImagesLoaded(): boolean {
+    return this.loadedImages == this.dispalyProducts.length;
   }
 
   public getDisplayProductAmount(): number {

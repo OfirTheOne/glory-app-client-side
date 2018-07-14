@@ -12,9 +12,7 @@ export class EnvironmentService {
     constructor() {
         console.log(`${_env}`);
         this.env = Object.freeze(_env); // making env object to be immutable
-
-        console.log(this.env);
-        
+        // console.log(JSON.stringify(this.env));        
     }
 
     get(keyName : string): string | undefined {
@@ -24,6 +22,7 @@ export class EnvironmentService {
         } else {
             console.log(`env has no property name ${keyName}.`);
         }
+        console.log(JSON.stringify(this.env));
     }
 
     getEnv(): {[key: string]: string | undefined} {

@@ -1,10 +1,8 @@
-import { AgentAuthService } from './../../services/auth/agent-auth.service';
 import { Component, ViewChild } from '@angular/core';
 import { 
   IonicPage, 
   NavParams, 
   AlertController, 
-  ActionSheetController, 
   ModalController, 
   Select, 
   ViewController
@@ -12,8 +10,7 @@ import {
 
 import { FullImgPage } from './full-img/full-img';
 
-
-import { MainApiService } from './../../services/main-api.service';
+import { AgentAuthService } from './../../services/auth/agent-auth.service';
 import { FavService } from './../../services/local-services/fav.service';
 import { CartService } from './../../services/local-services/cart.service';
 

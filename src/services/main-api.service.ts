@@ -49,26 +49,26 @@ export class MainApiService {
 
     // *** product ***
     // no auth needed
-    async getProductById(pid: string): Promise<Product> {
-        const res = await this.productApi.getProductById(pid);
-        return res.data;
-    }
+    // async getProductById(pid: string): Promise<Product> {
+    //     const res = await this.productApi.getProductById(pid);
+    //     return res.data;
+    // }
 
-    // no auth needed    
-    async getProductsByCategory(category: string): Promise<Product[]> {
-        const res = await this.productApi.getProductsByCategory(category);
-        return res.data;
-    }
+    // // no auth needed    
+    // async getProductsByCategory(category: string): Promise<Product[]> {
+    //     const res = await this.productApi.getProductsByCategory(category);
+    //     return res.data;
+    // }
 
-    // no auth needed        
-    async getFilteredProducts(filterParams:
-        { view: string, category: string, sort: string, min?: string, max?: string })
-        : Promise<Product[]> {
-        const params = new HttpParams({ fromObject: filterParams });
-        const res = await this.productApi.getProductsByFilterParams(params);
-        return res.data
+    // // no auth needed        
+    // async getFilteredProducts(filterParams:
+    //     { view: string, category: string, sort: string, min?: string, max?: string })
+    //     : Promise<Product[]> {
+    //     const params = new HttpParams({ fromObject: filterParams });
+    //     const res = await this.productApi.getProductsByFilterParams(params);
+    //     return res.data
 
-    }
+    // }
 
 
 
@@ -113,53 +113,53 @@ export class MainApiService {
 
     
 
-    // *** wish ***
-    async getUserWish(): Promise<{ wishList: string[] }> {
-        try {
-            if (this.authService.isSignIn()) {
-                const header = this.authService.getAuthHeader()
-                const res = await this.favApi.getUserWish(header);
-                return res.data;
-            }
-        } catch (e) {
-            throw e;
-        }
-    }
+    // // *** wish ***
+    // async getUserWish(): Promise<{ wishList: string[] }> {
+    //     try {
+    //         if (this.authService.isSignIn()) {
+    //             const header = this.authService.getAuthHeader()
+    //             const res = await this.favApi.getUserWish(header);
+    //             return res.data;
+    //         }
+    //     } catch (e) {
+    //         throw e;
+    //     }
+    // }
 
 
-    async getUserWishProducts(): Promise<Product[]> {
-        try {
-            if (this.authService.isSignIn()) {
-                const header = this.authService.getAuthHeader()
-                const res = await this.favApi.getUserWishProducts(header);
-                return res.data;
-            }
-        } catch (e) {
-            throw e;
-        }
-    }
+    // async getUserWishProducts(): Promise<Product[]> {
+    //     try {
+    //         if (this.authService.isSignIn()) {
+    //             const header = this.authService.getAuthHeader()
+    //             const res = await this.favApi.getUserWishProducts(header);
+    //             return res.data;
+    //         }
+    //     } catch (e) {
+    //         throw e;
+    //     }
+    // }
 
 
-    async addProductToWish(pid: string): Promise<void> {
-        try{
-            if (this.authService.isSignIn()) {
-                const header = this.authService.getAuthHeader();
-                await this.favApi.postProductsToWish(header, { pid });
-            }
-        } catch(e) {
-            throw e;
-        }
-    }
+    // async addProductToWish(pid: string): Promise<void> {
+    //     try{
+    //         if (this.authService.isSignIn()) {
+    //             const header = this.authService.getAuthHeader();
+    //             await this.favApi.postProductsToWish(header, { pid });
+    //         }
+    //     } catch(e) {
+    //         throw e;
+    //     }
+    // }
 
 
-    async removeProductFromWish(pid: string): Promise<void> {
-        try {
-            if (this.authService.isSignIn()) {
-                const header = this.authService.getAuthHeader();
-                await this.favApi.deleteProductFromWish(header, pid);
-            }
-        } catch (e) {
-            throw e;
-        }
-    }
+    // async removeProductFromWish(pid: string): Promise<void> {
+    //     try {
+    //         if (this.authService.isSignIn()) {
+    //             const header = this.authService.getAuthHeader();
+    //             await this.favApi.deleteProductFromWish(header, pid);
+    //         }
+    //     } catch (e) {
+    //         throw e;
+    //     }
+    // }
 }

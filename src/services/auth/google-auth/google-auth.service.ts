@@ -51,11 +51,20 @@ export class GoogleAuthStrategyService extends AuthStrategyService {
         if (this.isAuth2Init) {
 
             // sign in the user using google services.
-            const res = await this.auth2.signIn();
-            console.log('User signed in.');
-            const token = res.Zi.id_token;
-            return await this._signInToServer({ token });
+            try {
+                const res = await this.auth2.signIn();
+                console.log(res);
+                console.log('User signed in.');
+                const token = res.Zi.id_token;
+                return await this._signInToServer({ token });
+                
+            } catch (error) {
+                console.log(error);
+                throw error;
+            }
+                
         } else {
+
             throw new Error('the auth2 object is\'nt initialized');
         }
     }

@@ -11,46 +11,30 @@ import { Product } from './../../models/store-models/product.interface';
 export class ProductApiService {
 
     private readonly curSubRoute = 'products/';
+    private rootRoute: string;
 
-    constructor(private http: HttpService, private env: EnvironmentService) { }
+    constructor(private http: HttpService, private env: EnvironmentService) {
+        this.rootRoute = this.env.get('API_URL');
+     }
 
     async getProductById(pid: string): Promise<ServerResponse<Product>> {
         console.log(`getProductById(${pid})`);
-        const queryUrl = this.env.get('API_URL') + this.curSubRoute + pid;
-            const res = await this.http.get<Product>(queryUrl);
-            return res;
-
-
+        const queryUrl = this.rootRoute + this.curSubRoute + pid;
+        const result = await this.http.get<Product>(queryUrl);
+        return result;
     }
 
     async getProductsByCategory(cat: string): Promise<ServerResponse<Product[]>> {
-
         console.log(`getProductsByCategory(${cat})`);
-        const queryUrl = this.env.get('API_URL') + this.curSubRoute + 'cat/' + cat;
-            const res = await this.http.get<Product[]>(queryUrl);
-            return res;
+        const queryUrl = this.rootRoute + this.curSubRoute + 'cat/' + cat;
+        const result = await this.http.get<Product[]>(queryUrl);
+        return result;
     }
 
     async getProductsByFilterParams(params: HttpParams): Promise<ServerResponse<Product[]>> {
         console.log(`getProductsByFilterParams(${params})`);
-        const queryUrl = this.env.get('API_URL') + this.curSubRoute + 'filter/q';
-            const res = await this.http.get<Product[]>(queryUrl, undefined, params);
-            return res;
+        const queryUrl = this.rootRoute + this.curSubRoute + 'filter/q';
+        const result = await this.http.get<Product[]>(queryUrl, undefined, params);
+        return result;
     }
-
-    /* only Admin
-    async deleteProductById(pid: string)
-    : Promise <HttpResponse<ServerResponses<Product>>> {
-
-        console.log(`deleteProductById(${pid})`);
-        const queryUrl = apiUrl + this.curSubRoute + pid;
-        try {
-            const res = await this.httpClient.delete<ServerResponses<Product>>(queryUrl, { observe: 'response' }).toPromise();
-            return res;
-        } catch (e) {
-            throw e;
-        }
-    }
-    */
-
 }
