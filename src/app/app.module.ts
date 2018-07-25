@@ -1,4 +1,3 @@
-import { MainApiService } from './../services/main-api.service';
 import { NgModule, ErrorHandler } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
@@ -17,9 +16,11 @@ import { ItemPageModule } from './../pages/item/item.module';
 import { ItemsGridPageModule } from './../pages/store/items-grid/items-grid.module';
 import { CategoriesPageModule } from './../pages/store/categories/categories.module';
 import { StoreViewbyPageModule } from './../pages/store/store-viewby/store-viewby.module';
-import { PurchasePageModule } from './../pages/bag/purchase/purchase.module';
+import { UserAddressPageModule } from './../pages/account/user-address/user-address.module';
+import { UserDetailsPageModule } from './../pages/account/user-details/user-details.module';
 import { AccountPageModule } from './../pages/account/account.module';
 import { FavPageModule } from './../pages/fav/fav.module';
+import { PurchasePageModule } from './../pages/bag/purchase/purchase.module';
 import { BagPageModule } from './../pages/bag/bag.module';
 
 // ionic pages
@@ -27,17 +28,23 @@ import { MyApp } from './app.component';
 import { TabsPage } from '../pages/tabs/tabs';
 
 // pages
-import { FullImgPage } from './../pages/item/full-img/full-img';
 import { LoadPage } from './../pages/load/load';
 import { SignUpPage } from './../pages/auth/sign-up/sign-up';
 import { SignInPage } from './../pages/auth/sign-in/sign-in';
-import { ItemsGridPage } from './../pages/store/items-grid/items-grid';
+
+import { FullImgPage } from './../pages/item/full-img/full-img';
 import { ItemPage } from './../pages/item/item';
+import { ItemsGridPage } from './../pages/store/items-grid/items-grid';
 import { CategoriesPage } from './../pages/store/categories/categories';
 import { StoreViewbyPage } from './../pages/store/store-viewby/store-viewby';
-import { PurchasePage } from './../pages/bag/purchase/purchase';
+
 import { FavPage } from './../pages/fav/fav';
+
+import { PurchasePage } from './../pages/bag/purchase/purchase';
 import { BagPage } from './../pages/bag/bag';
+
+import { UserAddressPage } from './../pages/account/user-address/user-address';
+import { UserDetailsPage } from '../pages/account/user-details/user-details';
 import { AccountPage } from './../pages/account/account';
 
 // services
@@ -82,10 +89,14 @@ import { CartService } from './../services/local-services/cart.service';
     StoreViewbyPageModule,
     BagPageModule,
     FavPageModule,
+    UserAddressPageModule,
+    UserDetailsPageModule,
     AccountPageModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [
+    UserAddressPage,
+    UserDetailsPage,
     FullImgPage,
     LoadPage,
     SignInPage,
@@ -118,7 +129,6 @@ import { CartService } from './../services/local-services/cart.service';
     ProductApiService,
     FavApiService,
     CartApiService,
-    MainApiService,
 
     ProductService,
     FavService,

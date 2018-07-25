@@ -7,6 +7,7 @@
 
 <ion-content padding>
 
+  <!-- promot user to sign in / up -->
   <ion-grid *ngIf="isUserSign === false; else userSign;">
         <ion-row>
           <ion-col text-center col-12>
@@ -37,13 +38,17 @@
   
   <ng-template #userSign>
 
+    <!-- empty cart message -->
     <ng-template #cartEmpty>
       <h2 text-center>Your cart is empty</h2>
+      <hr>
     </ng-template>
+
+
     <!-- HERE item card -->
-    <ion-card padding-0 *ngIf="cart.length > 0; else cartEmpty;">
+    <ion-card  padding-0 *ngIf="cart.length > 0; else cartEmpty;">
       <ion-list>
-        <ion-item-sliding *ngFor="let cartProduct of cart; let i = index">
+        <ion-item-sliding class="product-item" *ngFor="let cartProduct of cart; let i = index">
           <ion-item>
             <ion-thumbnail item-start>
               <img src="{{cartProduct.product.imagePath}}">
@@ -80,7 +85,7 @@
 
       </ion-list>
     </ion-card>
-    <hr>
+
   </ng-template>
 
 </ion-content>
@@ -93,7 +98,7 @@
 
       </ion-col>
       <ion-col>
-        <button ion-button outline round>Check Out</button>
+        <button ion-button outline [disabled]="cart.length == 0" round (click) = "onChackOut()">Check Out</button>
       </ion-col>
     </ion-row>
   </ion-toolbar>

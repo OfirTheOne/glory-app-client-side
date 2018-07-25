@@ -35,8 +35,9 @@ export abstract class AuthStrategyService {
     public abstract isSignIn(): boolean;
 
     public abstract getAuthHeader(): HttpHeaders;
-
+    
     public abstract getToken(): string;
+    
 
     /**
      * signData contains the provider and token that stored on the local storage, 
@@ -101,11 +102,20 @@ export abstract class AuthStrategyService {
         }
     }
 
+    public updateUserDbProfileOnAuthResponse(authResponse: AuthResponse) {
+        console.log(`updateUserObjectAfterPostUserDataRequest(${authResponse})`);
+        
+        const responseAuthResult = this.authenticateServerResponse(authResponse);
+        if(responseAuthResult) {
+            this.userDbProfile = authResponse.user;
+        }
+    }
+
     // mybe add this method --> public authResInitEventSubscribe(callback: () => void): Subscription;
 
     /************************ protected ************************/
-    
     protected abstract authenticateServerResponse(res: AuthResponse): boolean;
+
 
     protected _buildAuthHeader(headersData: {token: string, providerName: string}): HttpHeaders {
         return new HttpHeaders({ 'x-auth': headersData.token, 'x-provider': headersData.providerName });

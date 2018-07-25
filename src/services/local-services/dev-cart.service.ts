@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as moment from 'moment';
 
-import { MainApiService } from '../main-api.service';
 // import { Product } from '../../models/product.interface';
 import { CartProduct } from '../../models/store-models/cart-product.interface';
 
@@ -21,7 +20,7 @@ export class DevCartService {
 
     private cartProducts: CartProduct[] = []
 
-    constructor(private mainController: MainApiService) { }
+    constructor() { }
 
 
     // public async getCartProducts(): Promise<CartProduct[]> {
@@ -38,7 +37,7 @@ export class DevCartService {
     //     return 
     // }
 
-
+/*
     private addPoductToMap(key: ProductMapKey,product: CartProduct) {
         if(this.productsMap.has(key)) {
 
@@ -75,8 +74,8 @@ export class DevCartService {
         const shoulde = moment(requestTimeStamp, 'seconds').isAfter(timeOut, 'seconds');
         return shoulde;
     }
+       */
 }
-
 
 
 /** 

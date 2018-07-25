@@ -15,7 +15,7 @@
 </ion-header>
 
 
-
+<!-- promot the use to sign in / up -->
 <ion-content padding *ngIf="isUserSignedIn() === false; else signIn;">
   <ion-grid>
     <ion-row>
@@ -46,45 +46,60 @@
   </ion-grid>
 </ion-content>
 
+
+
 <ng-template #signIn>
   <ion-content>
+
+    <!-- hello user header -->
     <ion-toolbar class="account-toolbar">
-        <ion-grid>
-      <ion-row>
-        <ion-col><span text-center ion-text>Hello, User</span></ion-col>
-      </ion-row>
+      <ion-grid>
+        <ion-row>
+          <ion-col text-center>
+            <span ion-text>Hello, {{name}}</span>
+          </ion-col>
+        </ion-row>
       </ion-grid>
     </ion-toolbar>
+
 
     <ion-grid>
       <ion-row>
         <ion-col>
+
           <ion-list>
             <button ion-item>
               <ion-icon name="clipboard" item-start></ion-icon>
               <h3>My orders</h3>
             </button>
-            <button ion-item>
+
+            <button ion-item (click)="onGotoDetailsPage()" >
               <ion-icon name="list" item-start></ion-icon>
               <h3>My details</h3>
             </button>
-            <button ion-item>
+
+            <button ion-item (click)="onGotoAddressPage()">
               <ion-icon name="home" item-start></ion-icon>
               <h3>Shipping address</h3>
             </button>
           </ion-list>
+
           <ion-list>
             <button ion-item (click)="onLogOut()">
               <ion-icon name="exit" item-start></ion-icon>
               <h3>Log out</h3>
             </button>
+
             <button ion-item>
-                <ion-icon name="document" item-start></ion-icon>
-                <h3>Terms and conditions</h3>
-              </button>
+              <ion-icon name="document" item-start></ion-icon>
+              <h3>Terms and conditions</h3>
+            </button>
           </ion-list>
+
         </ion-col>
+
       </ion-row>
+      
     </ion-grid>
   </ion-content>
-  </ng-template>
+</ng-template>

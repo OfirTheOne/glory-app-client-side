@@ -26,6 +26,8 @@ export class FavService {
 
     // actions
 
+
+    
     public async getWishList(): Promise<string[]> {
         try {
             // if pass T.O update wishListIds

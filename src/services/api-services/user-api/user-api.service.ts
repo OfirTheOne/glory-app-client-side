@@ -11,11 +11,14 @@ import { Provider } from '../../../models/provider.enum';
 export class UserApiService {
 
     private readonly curSubRoute = 'users/';
+    private rootRoute: string;
 
     constructor(
-        private environment: EnvironmentService, 
+        private environment: EnvironmentService,
         private httpClient: HttpClient
-    ) { }
+    ) {
+        this.rootRoute = this.environment.get('API_URL');
+    }
 
     /************************ public ************************/
 
@@ -23,7 +26,7 @@ export class UserApiService {
         : Promise<HttpResponse<ServerResponse<AuthResponse>>> {
         console.log(`postSignUpUser(${provider}, ${requestBody})`);
         const queryUrl = this.environment.get('API_URL') + this.curSubRoute +
-            this.getRouteByProvider(provider);
+            this.getSignInRouteByProvider(provider);
         try {
             const res = await this.httpClient.post<ServerResponse<AuthResponse>>(queryUrl, requestBody,
                 { observe: 'response' }).toPromise();
@@ -68,9 +71,9 @@ export class UserApiService {
     }
 
 
-    public async postUserData(headers: HttpHeaders, requestBody: { data: { firstName?, lastName?, birthDate?, gender?} }) {
+    public async postUserData(headers: HttpHeaders, requestBody: postUserDataRequestBody) {
         console.log(`postUserData(${headers}, ${requestBody})`);
-        const queryUrl = this.environment.get('API_URL') + this.curSubRoute + 'data/';
+        const queryUrl = this.rootRoute + this.curSubRoute + 'data/';
         try {
             const res = await this.httpClient.post<ServerResponse<AuthResponse>>(queryUrl, requestBody,
                 { headers, observe: 'response' }).toPromise();
@@ -82,10 +85,15 @@ export class UserApiService {
     }
 
 
-    // not in use at the moment
+    
+    /** 
+     * @deprecated
+     * not in use at the moment
+    */
+    
     public async postRenewToken(headers: HttpHeaders, requestBody: { newToken: string }) {
         console.log(`postRenewToken(${headers}, ${requestBody})`);
-        const queryUrl = this.environment.get('API_URL') + this.curSubRoute + 'me/token/';
+        const queryUrl = this.rootRoute + this.curSubRoute + 'me/token/';
         try {
             const res = await this.httpClient.post(queryUrl, requestBody,
                 { headers, responseType: 'text' }).toPromise();
@@ -99,7 +107,7 @@ export class UserApiService {
 
     /************************ private ************************/
 
-    private getRouteByProvider(provider: Provider): String {
+    private getSignInRouteByProvider(provider: Provider): String {
         switch (provider) {
             case Provider.CUSTOM_PROVIDER:
                 return 'c/';
@@ -112,4 +120,12 @@ export class UserApiService {
         }
     }
 
+}
+
+interface postUserDataRequestBody {
+    data:{ 
+        personalData: { firstName: string, lastName: string, birthDate: string, gender: string } 
+    }|{ 
+        address: { country: string, address: string, city: string, postcode: string } 
+    }
 }

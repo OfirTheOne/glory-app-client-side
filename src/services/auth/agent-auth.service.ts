@@ -9,6 +9,7 @@ import { GoogleAuthStrategyService as GAS } from './google-auth/google-auth.serv
 import { FacebookAuthStrategyService as FAS } from './facebook-auth/facebook-auth.service';
 
 import { UserDataBase } from './../../models/user-data-base.interface';
+import { AuthResponse } from '../../models/custom-auth-models/auth-response.interface';
 import { Provider } from './../../models/provider.enum';
 
 @Injectable()
@@ -140,6 +141,9 @@ export class AgentAuthService {
     }
 
 
+        public updateUserOnPostUserDataRequest(authResponse: AuthResponse) {
+            this.authStrategy.updateUserDbProfileOnAuthResponse(authResponse);
+        }
 
 
     // * resources events related * //

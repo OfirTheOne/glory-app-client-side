@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-navbar>
+    <ion-buttons right>
+      <button left ion-button icon-only (click)="onEditModeToggle()">
+        <ion-icon class="navbar-icon" [name]="editMode? 'ios-create-outline' : 'create'"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title text-center>GLORY</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  <form [formGroup]="userAddressForm" (ngSubmit)="onSubmit()">
+    <ion-list inset>
+      <ion-item text-center>
+        <span ion-text>Shipping Address</span>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating>Country</ion-label>
+        <ion-input formControlName="country"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating>Address</ion-label>
+        <ion-input formControlName="address"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating>City</ion-label>
+        <ion-input formControlName="city"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating>Postcode</ion-label>
+        <ion-input formControlName="postcode"></ion-input>
+      </ion-item>
+    </ion-list>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col offset-1 col-10>
+          <button *ngIf="editMode" full ion-button color="dark" type="submit">Submit Changes</button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+  </form>
+</ion-content>

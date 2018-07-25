@@ -8,6 +8,7 @@ import { SignUpPage } from '../auth/sign-up/sign-up';
 import { AgentAuthService } from '../../services/auth/agent-auth.service';
 import { CartService } from './../../services/local-services/cart.service';
 import { CartProduct } from './../../models/store-models/cart-product.interface';
+import { PurchasePage } from './purchase/purchase';
 
 
 @IonicPage()
@@ -79,6 +80,14 @@ export class BagPage {
     } catch (e) {
       console.log(e);
     }
+  }
+
+  public onChackOut() {
+    if(this.cart.length > 0) {
+      const modal = this.modalCtrl.create(PurchasePage);
+      modal.present();
+    }
+
   }
 
 }
