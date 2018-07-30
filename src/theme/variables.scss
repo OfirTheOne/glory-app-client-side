@@ -16,9 +16,6 @@ ion-icon.demo-icon-center-title {
 }
 
 
-.text-bold {
-  font-weight: bold !important;
-}
 
 @import "ionic.globals";
 
@@ -31,7 +28,7 @@ ion-icon.demo-icon-center-title {
 // http://ionicframework.com/docs/theming/overriding-ionic-variables/
 
 
-
+@import "./utils-styles";
 
 // Named Color Variables
 // --------------------------------------------------
@@ -41,6 +38,7 @@ ion-icon.demo-icon-center-title {
 // colors so you can add, rename and remove colors as needed.
 // The "primary" color is the only required color in the map.
 
+
 $colors: (
   primary:    #488aff,
   secondary:  #32db64,
@@ -49,8 +47,14 @@ $colors: (
   dark:       #222,
   vanilla :   #FAF7E5,
   light_gray: #f4f4f4,
-  _gray: gray,
+  _gray: #808080,
 
+  1st: #0000ff,
+  2nd: #0000ff,
+  a3rd: #0000ff,
+  a4th: #0000ff,
+  a5th: #0000ff,
+  a6th: #0000ff,
 
 
   facebookBlue: #3b5998,
@@ -59,6 +63,8 @@ $colors: (
   linkedinBlue: #007bb5,
 );
 
+
+@import './color-styles';
 
 // App iOS Variables
 // --------------------------------------------------

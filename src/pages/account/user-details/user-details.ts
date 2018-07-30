@@ -34,7 +34,7 @@ export class UserDetailsPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad UserDetailsPage');
     const user = this.authService.getProfile();
-    setTimeout(() => {
+    setTimeout(async () => {
       this.resetFormToActualUserData(user.personalData);
       this.setFiledsState();
     });

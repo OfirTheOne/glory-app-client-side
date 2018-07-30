@@ -1,23 +1,21 @@
-import { UserDataBase } from './../../models/user-data-base.interface';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 
 import { SignInPage } from '../auth/sign-in/sign-in';
 import { SignUpPage } from '../auth/sign-up/sign-up';
+import { StoreViewbyPage } from './../store/store-viewby/store-viewby';
 import { UserDetailsPage } from './user-details/user-details';
 import { UserAddressPage } from './user-address/user-address';
 
 import { AgentAuthService } from '../../services/auth/agent-auth.service';
+import { TabNavService } from '../../services/tab-nav.service';
 
-import { Provider } from '../../models/provider.enum';
 @IonicPage()
 @Component({
   selector: 'page-account',
   templateUrl: 'account.html',
 })
 export class AccountPage {
-  signInPage = SignInPage;
-  signUpPage = SignUpPage;
 
   name = '';
 
@@ -25,6 +23,7 @@ export class AccountPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     private modalCtrl: ModalController,
+    private tabService: TabNavService,
     private authService: AgentAuthService) {
   }
 
@@ -43,7 +42,9 @@ export class AccountPage {
     return this.authService.isSignIn();
   }
 
-
+  public onSignOut(){
+    this.authService.onSignOut();
+  }
 
 
   /*  page modal navigations  */
@@ -51,14 +52,16 @@ export class AccountPage {
   public onGotoSignInPage() {
     const modal = this.presentModal(SignInPage);
     modal.onDidDismiss(() => {
-      console.log('...');
+      console.log('Sign in page dismissed');
+      this.tabService.dispatchOnSetSelectedTab();
     });
   }
 
   public onGotoSignUpPage() {
     const modal = this.presentModal(SignUpPage);
     modal.onDidDismiss(() => {
-      console.log('...');
+      console.log('Sign up page dismissed');
+      this.tabService.dispatchOnSetSelectedTab();
     });
   }
 
@@ -69,10 +72,6 @@ export class AccountPage {
   public onGotoAddressPage() {
     this.goToPage(UserAddressPage);
   }
-
-
-
-
 
   private presentModal(Page) {
     console.log(Page);

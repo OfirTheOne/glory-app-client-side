@@ -1,0 +1,18 @@
+
+// variable set to balance all font size classes
+$font-size-balancer: 1.2rem;
+
+
+.fs-xs { font-size: calc(#{$font-size-balancer}*0.6) !important; }
+.fs-sm { font-size: calc(#{$font-size-balancer}*0.8) !important; }
+.fs-st { font-size: #{$font-size-balancer} !important; }
+.fs-lr { font-size: calc(#{$font-size-balancer}*1.5) !important; }
+.fs-xl { font-size: calc(#{$font-size-balancer}*2) !important; }
+
+.fs-title { font-size: 2.4rem !important; }
+
+.fw-bold { font-weight: bold !important; }
+.fw-light { font-weight: lighter !important; }
+
+
+.text-bold { font-weight: bold !important; }

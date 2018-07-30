@@ -93,7 +93,7 @@ export class AgentAuthService {
             signStatus = false;
         } else {
             signStatus = this.authStrategy.isSignIn() && (this.authStrategy.getProfile() != undefined);
-            console.log(`from isSignIn - ${JSON.stringify(this.authStrategy.getProfile())}`);
+            // console.log(`from isSignIn - ${JSON.stringify(this.authStrategy.getProfile())}`);
             if (signStatus) {
                 const oldToken = this.sdm.getDeclaredSignData().token;
                 const newToken = this.authStrategy.getToken();

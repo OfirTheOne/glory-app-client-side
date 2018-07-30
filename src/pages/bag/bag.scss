@@ -1,6 +1,9 @@
 page-bag {
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
-  
+    ion-icon.blank-user-icon {
+      font-size: 7em !important;
+    } 
+
     ion-card {
       box-shadow: none !important;
       ion-list{
@@ -8,31 +11,31 @@ page-bag {
           height: 20vh;
           ion-thumbnail {
             img {
-              height: 18vh !important;
+              height: 20vh !important;
               width: 15vh !important;
             }
+          }
+          ion-label {
+            margin-top: 0px;
+
           }
         }
       }
     }
   
-    ion-icon.blank-user-icon {
-      font-size: 7em !important;
-  
-    }
     .vertical-align-content * {
       display: flex!important;
       vertical-align: center!important;
       align-items: center!important;
     }
   
-    count-tool {
-      border-color: #e0e0e0;
-    }
-
     .product-item {
       margin-top: 4px;
       border: 0.5px solid lightgray;
+    }
+
+    .bag-title {
+      font-size: 2.4rem !important;
     }
   }
   

@@ -5,10 +5,14 @@
 </ion-header>
 
 <ion-content padding class="card-background-page">
-  <ion-searchbar color="light_gray" animated="true" (input)="getProducts($event)"></ion-searchbar>
+  <div [ngClass]="{'slideOutSuperUp': selectedViewIndex != undefined}" class="animated">
+    <ion-searchbar color="light_gray" animated="true" (input)="getProducts($event)"></ion-searchbar>
+  </div>
 
-  <ion-card *ngFor="let view of viewBy"
-  [navPush]="categoriesPage" [navParams]="view">
+  <ion-card *ngFor="let view of viewBy; let i = index;"
+   (click)="onViewBySelected(i, view)" class="animated"
+   [ngClass]="{'slideOutSuperUp': and(selectedViewIndex > i, selectedViewIndex != undefined), 
+               'slideOutSuperDown':   and(i >= selectedViewIndex, selectedViewIndex != undefined)}">
     <img />
     <div class="card-title">{{view}}</div>
   </ion-card>

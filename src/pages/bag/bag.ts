@@ -9,6 +9,7 @@ import { AgentAuthService } from '../../services/auth/agent-auth.service';
 import { CartService } from './../../services/local-services/cart.service';
 import { CartProduct } from './../../models/store-models/cart-product.interface';
 import { PurchasePage } from './purchase/purchase';
+import { TabNavService } from '../../services/tab-nav.service';
 
 
 @IonicPage()
@@ -29,11 +30,10 @@ export class BagPage {
     public navCtrl: NavController, 
     public navParams: NavParams,
     private modalCtrl: ModalController,
-    
+    private tabService: TabNavService,
     private authService: AgentAuthService,
     private cartService: CartService
-  ) {
-  }
+  ) { }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad BagPage');
@@ -51,22 +51,26 @@ export class BagPage {
     }
   }
   
-  isUserSignedIn(): boolean {
+  public isUserSignedIn(): boolean {
     return this.authService.isSignIn();
   }
 
   
-  onGotoSignInPage() {
-    const modal = this.modalCtrl.create(SignInPage);
-    modal.present();
+
+  public onGotoSignInPage() {
+    const modal = this.presentModal(SignInPage);
     modal.onDidDismiss(() => {
-      console.log('...');
+      console.log('Sign in page dismissed');
+      this.tabService.dispatchOnSetSelectedTab();
     });
   }
 
-  onGotoSignUpPage() {
-    const modal = this.modalCtrl.create(SignUpPage);
-    modal.present();
+  public onGotoSignUpPage() {
+    const modal = this.presentModal(SignUpPage);
+    modal.onDidDismiss(() => {
+      console.log('Sign up page dismissed');
+      this.tabService.dispatchOnSetSelectedTab();
+    });
   }
 
 
@@ -84,10 +88,24 @@ export class BagPage {
 
   public onChackOut() {
     if(this.cart.length > 0) {
-      const modal = this.modalCtrl.create(PurchasePage);
-      modal.present();
+      const modal = this.presentModal(PurchasePage);
+      modal.onDidDismiss(() => {
+        console.log('PurchasePage dismissed.')
+      })
     }
 
   }
+
+  private presentModal(Page) {
+    console.log(Page);
+    const modal = this.modalCtrl.create(Page);
+    modal.present();
+    return modal;
+  }
+
+  private goToPage(Page, params?) {
+    return this.navCtrl.push(Page, params);
+  }
+
 
 }

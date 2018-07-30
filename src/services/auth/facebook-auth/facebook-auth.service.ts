@@ -66,7 +66,7 @@ export class FacebookAuthStrategyService extends AuthStrategyService {
          *  https://developers.facebook.com/docs/facebook-login/web#logout
          */
         const tmpProfile = this.userDbProfile;
-        const headers = this.getAuthHeader();
+        // const headers = this.getAuthHeader();
 
         try {
             this.userDbProfile = undefined;
@@ -76,7 +76,7 @@ export class FacebookAuthStrategyService extends AuthStrategyService {
         } catch(e) {
             this.userDbProfile = tmpProfile;
         }
-        await this._signOutFromServer(headers);
+        // await this._signOutFromServer(headers);
     }
 
     public isSignIn(): boolean {

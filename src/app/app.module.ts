@@ -47,19 +47,25 @@ import { UserAddressPage } from './../pages/account/user-address/user-address';
 import { UserDetailsPage } from '../pages/account/user-details/user-details';
 import { AccountPage } from './../pages/account/account';
 
-// services
+// ****** services
+// core services
 import { EnvironmentService } from '../services/environment/environment.service';
+import { TabNavService } from '../services/tab-nav.service';
+import { HttpService } from '../services/api-services/http.service';
+
+// api services
 import { UserApiService } from '../services/api-services/user-api/user-api.service';
+import { CartApiService } from './../services/api-services/cart-api.service';
+import { FavApiService } from './../services/api-services/fav-api.service';
+import { ProductApiService } from './../services/api-services/product-api.service';
+
+// auth services
 import { AgentAuthService } from '../services/auth/agent-auth.service';
 import { CustomAuthStrategyService } from '../services/auth/custom-auth/custom-auth.service';
 import { FacebookAuthStrategyService } from '../services/auth/facebook-auth/facebook-auth.service';
 import { GoogleAuthStrategyService } from '../services/auth/google-auth/google-auth.service';
 
-import { HttpService } from '../services/api-services/http.service';
-import { CartApiService } from './../services/api-services/cart-api.service';
-import { FavApiService } from './../services/api-services/fav-api.service';
-import { ProductApiService } from './../services/api-services/product-api.service';
-
+// local data services
 import { ProductService } from './../services/local-services/product.service';
 import { FavService } from '../services/local-services/fav.service';
 import { CartService } from './../services/local-services/cart.service';
@@ -117,6 +123,7 @@ import { CartService } from './../services/local-services/cart.service';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     EnvironmentService,
+    TabNavService,
     
     UserApiService,
     

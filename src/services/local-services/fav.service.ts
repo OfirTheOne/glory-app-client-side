@@ -11,7 +11,7 @@ import { Product } from '../../models/store-models/product.interface';
  */
 @Injectable()
 export class FavService {
-    private readonly updateTimeOut = 15 * 60; // every 15 min will request the list from the db
+    private readonly updateTimeOut = 4 * 60; // every 4 min will request the list from the db
 
     lastIdsRequestTimeStamp: number = null;
     lastProductsRequestTimeStamp: number = null;
@@ -39,8 +39,8 @@ export class FavService {
                     this.setLastIdsRequestTimeStamp();
                 }
             }
-        } catch (e) {
-            console.log(e);
+        } catch (error) {
+            console.log(error);
         }
         return this.wishListIds;
     }
@@ -58,6 +58,8 @@ export class FavService {
             }
         } catch (error) {
             console.log(error);
+            await this.authService.onSignOut();
+            this.flushWishService();
         }
         return this.wishListProducts;
     }
@@ -72,10 +74,12 @@ export class FavService {
                 await this.favApi.postProductsToWish(header, { pid });
             }
             this.pushToArray(this.wishListProducts, product);
-        } catch (e) {
-            console.log(e);
+        } catch (error) {
+            console.log(error);
             // if add action failed adding back to the wishListIds
             this.removeFromArray(this.wishListIds, pid);
+            await this.authService.onSignOut();
+            this.flushWishService();
         }
     }
 
@@ -89,10 +93,12 @@ export class FavService {
                 await this.favApi.deleteProductFromWish(header, pid);
                 this.removeFromArray(this.wishListProducts, product);
             }
-        } catch (e) {
-            console.log(e);
+        } catch (error) {
+            console.log(error);
             // if remove action failed adding back to the wishListIds
             this.pushToArray(this.wishListIds, pid);
+            await this.authService.onSignOut();
+            this.flushWishService();
         }
     }
 
@@ -102,6 +108,9 @@ export class FavService {
         return this.wishListIds.indexOf(productId) > -1;
     }
 
+    public isWishListProductsRequestAsync(): boolean {
+        return this.shouldeGetUpdatedList(this.lastProductsRequestTimeStamp);
+    }
 
     // cache data 
 
@@ -145,5 +154,7 @@ export class FavService {
             array.push(newElement);
         }
     }
+
+ 
 
 }

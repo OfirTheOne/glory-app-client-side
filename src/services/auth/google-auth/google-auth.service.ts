@@ -74,14 +74,14 @@ export class GoogleAuthStrategyService extends AuthStrategyService {
         const tmpProfile = this.userDbProfile;
         if (this.isAuth2Init && this.auth2.isSignedIn.get()) {
             this.userDbProfile = undefined;
-            const headers = this.getAuthHeader();
+            //const headers = this.getAuthHeader();
             try {
                 await this.auth2.signOut(); // this method do have no return value
             } catch(e) {
                 this.userDbProfile = tmpProfile;
             }
             console.log('User signed out.');
-            await this._signOutFromServer(headers);
+            // await this._signOutFromServer(headers);
 
         } else {
             throw new Error('the user is\'nt sign in or the auth2 object is\'nt initialized');

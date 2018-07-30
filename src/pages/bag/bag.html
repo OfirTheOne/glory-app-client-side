@@ -11,12 +11,12 @@
   <ion-grid *ngIf="isUserSign === false; else userSign;">
         <ion-row>
           <ion-col text-center col-12>
-            <ion-title>
+            <ion-title class="animated fadeIn">
                 Filling empty ..
               </ion-title>
-          </ion-col>
+          </ion-col> 
           <ion-col text-center offset-4 col-4>
-              <ion-icon color="light" class="blank-user-icon" name="contact"></ion-icon>
+              <ion-icon color="light" class="animated rollInLeft blank-user-icon" name="contact"></ion-icon>
           </ion-col>
         </ion-row>
         <ion-row>
@@ -26,12 +26,12 @@
         </ion-row>
         <ion-row align-items-center>
           <ion-col offset-2 col-8>
-            <button full ion-button (click)="onGotoSignInPage()"> Sign In </button>
+            <button class="animated bounceInRight fast" full ion-button (click)="onGotoSignInPage()"> Sign In </button>
           </ion-col>
         </ion-row>
         <ion-row align-items-center>
             <ion-col offset-2 col-8>
-                <button full ion-button (click)="onGotoSignUpPage()"> Sign Up </button>
+                <button class="animated bounceInRight" full ion-button (click)="onGotoSignUpPage()"> Sign Up </button>
             </ion-col>
         </ion-row>
    </ion-grid>
@@ -40,37 +40,36 @@
 
     <!-- empty cart message -->
     <ng-template #cartEmpty>
-      <h2 text-center>Your cart is empty</h2>
+      <h2 text-center>Your bag is empty</h2>
       <hr>
     </ng-template>
 
 
     <!-- HERE item card -->
-    <ion-card  padding-0 *ngIf="cart.length > 0; else cartEmpty;">
+    <ion-card class="mt-0" *ngIf="cart.length > 0; else cartEmpty;">
+      <h2 class="bag-title" text-center>Your Bag</h2>
+      <hr>
+      <div text-center class="pt-2">
+        <h2 *ngIf="cart.length == 1;">1 Item</h2>
+        <h2 *ngIf="cart.length > 1;">{{cart.length}} Items</h2>
+        <hr class="pb-1">
+      </div>
       <ion-list>
-        <ion-item-sliding class="product-item" *ngFor="let cartProduct of cart; let i = index">
-          <ion-item>
-            <ion-thumbnail item-start>
+        <ion-item-sliding class="mt-2 product-item" *ngFor="let cartProduct of cart; let i = index">
+          <ion-item no-padding>
+            <ion-thumbnail class="pl-0" item-start>
               <img src="{{cartProduct.product.imagePath}}">
             </ion-thumbnail>
             <ion-row>
               <ion-col>
                 <h2>{{cartProduct.product.description}}</h2>
-
+                <h3 class="text-bold">{{cartProduct.product.price}} $</h3>
               </ion-col>
             </ion-row>
-            <hr/>
             <ion-row>
               <ion-col>
-                <p>price:  {{cartProduct.product.price}}</p>
-                <p>size: {{cartProduct.size}}</p>
-              </ion-col>
-              <ion-col>
-                <!-- <count-tool [minLimit]="1"[maxLimit]="10" [count]="cartItem.amount"
-                            (valueIncrement)="addProductToCart(cartItem)"
-                            (valueDecrement)="removeProductFromCart(cartItem)">
-                </count-tool> -->
-                <!--<button ion-button clear >View</button>-->
+                <p>Size: {{cartProduct.size}}</p>
+                <p>Qty: {{cartProduct.amount}}</p>
               </ion-col>
             </ion-row>
 
@@ -82,7 +81,6 @@
             </button>
           </ion-item-options>
         </ion-item-sliding>
-
       </ion-list>
     </ion-card>
 
@@ -93,12 +91,11 @@
 <ion-footer no-border>
   <ion-toolbar *ngIf="isUserSign === true;">
     <ion-row class="vertical-align-content">
-      <ion-col>
+      <ion-col offset-2 col-4>
         <ion-title>Total : {{totalCartCost}} </ion-title>
-
       </ion-col>
-      <ion-col>
-        <button ion-button outline [disabled]="cart.length == 0" round (click) = "onChackOut()">Check Out</button>
+      <ion-col col-4>
+        <button ion-button outline [disabled]="cart.length==0" (click)="onChackOut()">Chack Out</button>
       </ion-col>
     </ion-row>
   </ion-toolbar>

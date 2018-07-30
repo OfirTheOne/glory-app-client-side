@@ -38,7 +38,7 @@ export class UserAddressPage {
 
 
   ionViewDidLoad() {
-    setTimeout(() => {
+    setTimeout(async () => {
       console.log('ionViewDidLoad UserAddressPage');
       const user = this.authService.getProfile();
       this.resetFormToActualUserData(user.address);

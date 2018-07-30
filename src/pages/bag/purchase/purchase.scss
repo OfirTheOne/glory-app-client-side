@@ -27,18 +27,19 @@ page-purchase {
                 }
             }        
             ion-card {
-                height: 85%;    
-
-                ion-card-title {
-                    padding-top: 0 !important; 
-                }
+                height: 80%;    
             }
+            // ion-card.delivery-details-card {
+                 
+            // }
+            // ion-card.delivery-options-card {
+                    
+            // }
+
         } 
     }
 
     
-
-
 
 
     /******* prograss bar ********/
@@ -50,7 +51,7 @@ page-purchase {
         ion-navbar {
             max-height: 30px;
             min-height: 30px;
-          }
+        }
 
     }
 
@@ -84,8 +85,8 @@ page-purchase {
 
 
     .step-pipe {
-        margin-top: 25%;
-        height: 12%;
+        // margin-top: 25%;
+        height: 6px;
         width: 100%;
         color: lightgray;
         background-color: lightgray;

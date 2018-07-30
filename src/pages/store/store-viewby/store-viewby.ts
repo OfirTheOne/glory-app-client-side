@@ -18,6 +18,7 @@ import { viewBy } from '../../../data/viewby.data';
 export class StoreViewbyPage {
   categoriesPage = CategoriesPage;
   viewBy = viewBy;
+  selectedViewIndex: number;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) { }
 
@@ -25,8 +26,29 @@ export class StoreViewbyPage {
     console.log('ionViewDidLoad StoreViewbyPage');
   }
 
+  ionViewWillEnter() {
+    this.selectedViewIndex = undefined;
+  }
+
   getProducts(event) {
     console.log(event);
   }
+
+  public onViewBySelected(index, view) {
+    console.log(view);
+    this.selectedViewIndex = index;
+    
+    setTimeout(()=>{
+      this.navCtrl.push(CategoriesPage, view);
+    },350);
+    
+  }
+
+public and(boolA, boolB) {
+  console.log(this.selectedViewIndex);
+  return boolA && boolB;
+} 
+
+
 
 }

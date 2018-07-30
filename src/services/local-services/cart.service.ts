@@ -11,7 +11,7 @@ import { CartProduct } from '../../models/store-models/cart-product.interface';
  */
 @Injectable()
 export class CartService {
-    private readonly updateTimeOut = 10 * 60; // every 10 min will request the cart from the db
+    private readonly updateTimeOut = 4 * 60; // every 4 min will request the cart from the db
 
     private lastProductsRequestTimeStamp: number = null;
     private cartProducts: CartProduct[] = []
@@ -35,6 +35,9 @@ export class CartService {
             }
         } catch (error) {
             console.log(error);
+             // 'user_verification_error'
+            await this.authService.onSignOut();
+            this.flushCartService();
         }
         return this.cartProducts;
     }
@@ -49,9 +52,11 @@ export class CartService {
                 const header = this.authService.getAuthHeader()
                 await this.cartApi.postProductsToCart(header, { pid, size });
             }
-        } catch (e) {
-            console.log(e);
+        } catch (error) {
+            console.log(error);
             this.deleteFromCartArray(cartProduct);
+            await this.authService.onSignOut();
+            this.flushCartService();
         }
     }
 
@@ -71,6 +76,8 @@ export class CartService {
         } catch (error) {
             console.log(error);
             this.insertToCartArray(cartProduct);
+            await this.authService.onSignOut();
+            this.flushCartService();
         }
     }
 
@@ -87,6 +94,9 @@ export class CartService {
     }
 
 
+    public isDataRequestAsync(): boolean {
+        return this.shouldeGetUpdatedList(this.lastProductsRequestTimeStamp);
+    }
 
     // cache
 
