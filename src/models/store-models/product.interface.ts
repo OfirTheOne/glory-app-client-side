@@ -8,7 +8,7 @@ export interface Product {
     createDate: number,
     onSale: boolean,
     newIn: boolean,
-    imagePath: string
+    imagePath: string[]
     season?: string,
     brand?: string,
 } 

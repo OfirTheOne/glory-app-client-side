@@ -126,9 +126,9 @@ export class ItemPage {
     alert.present();
   }
 
-  public goToFullImg() {
+  public goToFullImg(imageIndex: number) {
     const imgModel = this.modalCtrl.create(FullImgPage, {
-      imgSrc: this.product.imagePath
+      imgSrc: this.product.imagePath[imageIndex]
     });
     imgModel.present();
   }
