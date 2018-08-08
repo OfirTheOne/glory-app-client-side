@@ -58,7 +58,7 @@
         <ion-item-sliding class="mt-2 product-item" *ngFor="let cartProduct of cart; let i = index">
           <ion-item no-padding>
             <ion-thumbnail class="pl-0" item-start>
-              <img src="{{cartProduct.product.imagePath}}">
+              <img src="{{cartProduct.product.imagePath[0]}}">
             </ion-thumbnail>
             <ion-row>
               <ion-col>
