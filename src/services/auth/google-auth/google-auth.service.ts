@@ -78,6 +78,7 @@ export class GoogleAuthStrategyService extends AuthStrategyService {
             try {
                 await this.auth2.signOut(); // this method do have no return value
             } catch(e) {
+                console.log(e)
                 this.userDbProfile = tmpProfile;
             }
             console.log('User signed out.');

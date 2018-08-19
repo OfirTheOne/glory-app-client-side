@@ -52,7 +52,7 @@
   <ion-content>
 
     <!-- hello user header -->
-    <ion-toolbar class="animated spandInHigth account-toolbar">
+    <ion-toolbar class="account-toolbar">
       <ion-grid>
         <ion-row>
           <ion-col text-center>
@@ -67,8 +67,8 @@
       <ion-row>
         <ion-col>
 
-          <ion-list>
-            <button ion-item>
+          <ion-list class="account-menu-list">
+            <button class="account-menu-item" ion-item>
               <ion-icon name="clipboard" item-start></ion-icon>
               <h3>My orders</h3>
             </button>
@@ -82,9 +82,12 @@
               <ion-icon name="home" item-start></ion-icon>
               <h3>Shipping address</h3>
             </button>
-          </ion-list>
 
-          <ion-list>
+            <button ion-item (click)="onGotoPaymentMethodPage()">
+                <ion-icon name="card" item-start></ion-icon>
+                <h3>Payment method</h3>
+              </button>
+
             <button ion-item (click)="onSignOut()">
               <ion-icon name="exit" item-start></ion-icon>
               <h3>Sign out</h3>

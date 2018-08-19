@@ -1,0 +1,27 @@
+
+@import './variables';
+
+@mixin dimensionPercentage($dim, $percentage) {
+  .#{$dim}-#{$percentage} { 
+    #{$dim}: #{$percentage}#{'%'}; 
+  }
+}
+
+
+@mixin simpleKeyValue($key, $value) {
+  .#{$key}-#{$value} { 
+    #{$key}: #{$value}; 
+  }
+}
+
+
+@each $dim in $dimensions {
+  @for $i from 1 through 10 {
+        $perc: $i*10;
+        @include dimensionPercentage($dim, $perc - 5);
+        @include dimensionPercentage($dim, $perc);
+  }
+  @include simpleKeyValue($dim, 'auto');
+  @include simpleKeyValue($dim, 'inherit');
+  @include simpleKeyValue($dim, 'fit-content');
+}

@@ -1,5 +1,5 @@
 import { HttpParams } from '@angular/common/http';
-import { ProductApiService } from './../api-services/product-api.service';
+import { ProductApiService } from '../api-services/product-api.service';
 import { Injectable } from '@angular/core';
 import * as moment from 'moment';
 

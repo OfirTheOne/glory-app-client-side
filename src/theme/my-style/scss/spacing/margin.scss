@@ -1,0 +1,104 @@
+
+@import './variables'; // must be imported first !
+
+// *********
+// margin
+// *********
+
+
+/**
+ * m-x1-x2-x3-x4  [x1,x2,x3,x4 --> 0...4]  class structure
+ */
+@mixin marginSurroundCombination($top, $right, $bottom, $left) {
+    .m-#{$top}-#{$right}-#{$bottom}-#{$left} { 
+      margin: 
+        #{$top*$balancer} 
+        #{$right*$balancer} 
+        #{$bottom*$balancer} 
+        #{$left*$balancer};
+    }
+}
+@for $i from 0 through 4 {
+  @for $j from 0 through 4 {
+    @for $k from 0 through 4 {
+      @for $l from 0 through 4 {
+        @include marginSurroundCombination($i, $j, $k, $l);
+      }
+    }
+  }
+}
+
+
+// ****************************************************************************************** //
+
+
+/**
+ * m-x  [x --> 0...4] class structure
+ */
+@mixin marginSurround($surround) {
+    .m-#{$surround} { 
+      margin: 
+        #{$surround*$balancer}, 
+        #{$surround*$balancer}, 
+        #{$surround*$balancer}, 
+        #{$surround*$balancer}; 
+    }
+}
+@for $i from 0 through 4 {
+  @include marginSurround($i);
+}
+
+
+// ****************************************************************************************** //
+
+
+/**
+ * mt-x, mr-x, mb-x, ml-x  [x --> 0...4]  class structure
+ */
+@mixin marginSidesCombination($side_shortcut, $side, $multipler) {
+  .m#{$side_shortcut}-#{$multipler} { 
+    margin-#{$side}: 
+      #{$multipler*$balancer}; 
+  }
+}
+@each $config in $sides_config {
+  @for $i from 0 through 4 {
+    @include marginSidesCombination(nth($config, 2), nth($config, 1), $i);
+  }
+}
+
+// ****************************************************************************************** //
+
+
+/**
+ * mx-n, my-n [n --> 0...4] / auto  class structure
+ */
+ @mixin marginPivot($pivot, $side1, $side2, $multipler) {
+  .m#{$pivot}-#{$multipler} { 
+    margin-#{$side1}: #{$multipler*$balancer}; 
+    margin-#{$side2}: #{$multipler*$balancer}; 
+  }
+}
+
+@for $i from 0 through 4 {
+  @include marginPivot('x', $left, $right, $i);
+  @include marginPivot('y', $top, $bottom, $i);
+}
+
+.mx-auto {
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+.my-auto {
+  margin-top: auto !important;
+  margin-bottom: auto !important;
+}
+
+// ****************************************************************************************** //
+
+
+
+.m-auto { margin: auto; }
+
+.m-inherit { margin: inherit; }

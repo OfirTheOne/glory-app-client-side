@@ -8,10 +8,10 @@ import { LoadPage } from './../load/load';
 
 import { AgentAuthService } from './../../services/auth/agent-auth.service';
 import { FavService } from '../../services/local-services/fav.service';
+import { TabNavService } from '../../services/tab-nav.service';
 
 import { Product } from '../../models/store-models/product.interface';
 import { StoreViewbyPage } from '../store/store-viewby/store-viewby';
-import { TabNavService } from '../../services/tab-nav.service';
 
 
 @IonicPage()

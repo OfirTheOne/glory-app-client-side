@@ -1,11 +1,11 @@
-import { AgentAuthService } from './../../../services/auth/agent-auth.service';
-import { LoadPage } from './../../load/load';
-import { Product } from './../../../models/store-models/product.interface';
-import { FavService } from './../../../services/local-services/fav.service';
 import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController, Modal, Content, Button, NavOptions } from 'ionic-angular';
+
+import { AgentAuthService, ProductService, FavService } from './../../../services';
+
+import { LoadPage } from './../../load/load';
+import { Product } from './../../../models/store-models/product.interface';
 import { ItemPage } from '../../item/item';
-import { ProductService } from '../../../services/local-services/product.service';
 
 /**
  * Generated class for the ItemsGridPage page.
@@ -13,6 +13,7 @@ import { ProductService } from '../../../services/local-services/product.service
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
+const SCROLL_DEPTH_PIXELS = 35;
 
 @IonicPage()
 @Component({
@@ -168,7 +169,7 @@ export class ItemsGridPage {
 
   public scrollHandler(event) {
     const topOffset = event.scrollTop;
-    if (topOffset < 25) {
+    if (topOffset < SCROLL_DEPTH_PIXELS) {
       this.hideTopPageBtn();
 
     } else {

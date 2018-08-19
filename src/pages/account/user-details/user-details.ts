@@ -1,8 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, RadioGroup, RadioButton } from 'ionic-angular';
 import { NgForm, FormGroup, FormControl, Validators } from '@angular/forms';
-import { AgentAuthService } from '../../../services/auth/agent-auth.service';
-import { UserApiService } from '../../../services/api-services/user-api/user-api.service';
+import { UserApiService, AgentAuthService } from '../../../services';
 
 @IonicPage()
 @Component({

@@ -1,16 +1,15 @@
 
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController, AlertController } from 'ionic-angular';
 
 import { SignInPage } from '../auth/sign-in/sign-in';
 import { SignUpPage } from '../auth/sign-up/sign-up';
+import { PaymentPage } from './payment/payment';
 
-import { AgentAuthService } from '../../services/auth/agent-auth.service';
-import { CartService } from './../../services/local-services/cart.service';
-import { CartProduct } from './../../models/store-models/cart-product.interface';
-import { PurchasePage } from './purchase/purchase';
-import { TabNavService } from '../../services/tab-nav.service';
+import { AgentAuthService, CartService, TabNavService } from '../../services';
+import { CartProduct } from '../../models/store-models/cart-product.interface';
 
+import { isNullOrUndefined, isStringEmpty, allFiledsAre, not } from '../../utils'
 
 @IonicPage()
 @Component({
@@ -29,7 +28,9 @@ export class BagPage {
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
+    private alertCtrl: AlertController,
     private modalCtrl: ModalController,
+
     private tabService: TabNavService,
     private authService: AgentAuthService,
     private cartService: CartService
@@ -54,8 +55,6 @@ export class BagPage {
   public isUserSignedIn(): boolean {
     return this.authService.isSignIn();
   }
-
-  
 
   public onGotoSignInPage() {
     const modal = this.presentModal(SignInPage);
@@ -86,9 +85,14 @@ export class BagPage {
     }
   }
 
+
+
+
   public onChackOut() {
-    if(this.cart.length > 0) {
-      const modal = this.presentModal(PurchasePage);
+    if(!this.canUserChackOut()) {
+      this.presentAlert({title: 'Can\'t Cackout', subTitle:'invlide address details' });
+    } else if(this.cart.length > 0) {
+      const modal = this.presentModal(PaymentPage);
       modal.onDidDismiss(() => {
         console.log('PurchasePage dismissed.')
       })
@@ -96,9 +100,23 @@ export class BagPage {
 
   }
 
-  private presentModal(Page) {
+  private canUserChackOut() : boolean {
+    if(this.authService.isSignIn()) {
+      const userAddress = this.authService.getProfile().address;
+      
+      const result = !isNullOrUndefined(userAddress) 
+          && allFiledsAre(userAddress, not(isNullOrUndefined)) 
+          && allFiledsAre(userAddress, not(isStringEmpty));
+      return result;
+    } else {
+      return false;
+    }
+    
+  }
+
+  private presentModal(Page, data?: any) {
     console.log(Page);
-    const modal = this.modalCtrl.create(Page);
+    const modal = this.modalCtrl.create(Page, data);
     modal.present();
     return modal;
   }
@@ -107,5 +125,14 @@ export class BagPage {
     return this.navCtrl.push(Page, params);
   }
 
-
+  private presentAlert(options: {title: string, subTitle: string}) {
+    let alert = this.alertCtrl.create({
+      title: options.title,
+      subTitle: options.subTitle,
+      buttons: ['Got it']
+    });
+    alert.present();
+  }
 }
+
+

@@ -1,0 +1,96 @@
+
+@import './variables'; // must be imported first !
+
+// *********
+// padding
+// *********
+
+
+/**
+ * p-x1-x2-x3-x4  [x1,x2,x3,x4 --> 0...4]  class structure
+ */
+@mixin paddingSurroundCombination($top, $right, $bottom, $left) {
+    .p-#{$top}-#{$right}-#{$bottom}-#{$left} { 
+      padding: 
+        #{$top*$balancer} 
+        #{$right*$balancer} 
+        #{$bottom*$balancer} 
+        #{$left*$balancer};
+    }
+}
+@for $i from 0 through 4 {
+  @for $j from 0 through 4 {
+    @for $k from 0 through 4 {
+      @for $l from 0 through 4 {
+        @include paddingSurroundCombination($i, $j, $k, $l);
+      }
+    }
+  }
+}
+
+
+// ****************************************************************************************** //
+
+
+/**
+ * p-x  [x --> 0...4] class structure
+ */
+@mixin paddingSurround($surround) {
+    .p-#{$surround} { 
+      padding: 
+        #{$surround*$balancer}, 
+        #{$surround*$balancer}, 
+        #{$surround*$balancer}, 
+        #{$surround*$balancer};
+    }
+}
+@for $i from 0 through 4 {
+  @include paddingSurround($i);
+}
+
+
+// ****************************************************************************************** //
+
+
+/**
+ * pt-x, pr-x, pb-x, pl-x  [x --> 0...4]  class structure
+ */
+@mixin paddingSidesCombination($side_shortcut, $side, $multipler) {
+  .p#{$side_shortcut}-#{$multipler} { 
+    margin-#{$side}: 
+      #{$multipler*$balancer}; 
+  }
+}
+
+
+@each $config in $sides_config {
+    @for $i from 0 through 4 {
+      @include paddingSidesCombination(nth($config, 2), nth($config, 1), $i);
+    }
+}
+
+
+// ****************************************************************************************** //
+
+
+/**
+ * px-n, py-n [n --> 0...4]  class structure
+ */
+ @mixin paddingPivot($pivot, $side1, $side2, $multipler) {
+  .p#{$pivot}-#{$multipler} { 
+    padding-#{$side1}: #{$multipler*$balancer}; 
+    padding-#{$side2}: #{$multipler*$balancer}; 
+  }
+}
+@for $i from 0 through 4 {
+  @include paddingPivot('x', $left, $right, $i);
+  @include paddingPivot('y', $top, $bottom, $i);
+}
+
+
+// ****************************************************************************************** //
+
+
+.p-auto { padding: auto; }
+
+.p-inherit { padding: inherit; }

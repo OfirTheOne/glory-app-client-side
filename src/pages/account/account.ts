@@ -3,9 +3,11 @@ import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angu
 
 import { SignInPage } from '../auth/sign-in/sign-in';
 import { SignUpPage } from '../auth/sign-up/sign-up';
-import { StoreViewbyPage } from './../store/store-viewby/store-viewby';
+// import { StoreViewbyPage } from './../store/store-viewby/store-viewby';
+
 import { UserDetailsPage } from './user-details/user-details';
 import { UserAddressPage } from './user-address/user-address';
+import { PaymentMethodsPage } from './payment-methods/payment-methods';
 
 import { AgentAuthService } from '../../services/auth/agent-auth.service';
 import { TabNavService } from '../../services/tab-nav.service';
@@ -71,6 +73,10 @@ export class AccountPage {
 
   public onGotoAddressPage() {
     this.goToPage(UserAddressPage);
+  }
+
+  public onGotoPaymentMethodPage() {
+    this.goToPage(PaymentMethodsPage);
   }
 
   private presentModal(Page) {

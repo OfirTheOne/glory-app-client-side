@@ -1,7 +1,13 @@
-page-purchase {
+page-payment {
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
     ion-icon.demo-icon-center-title {
         font-size: 4.5rem !important;
+    }
+
+    ion-scroll {
+        .scroll-content {
+            position: relative !important;
+        }
     }
 
     ion-content {
@@ -13,9 +19,9 @@ page-purchase {
             div.slide-zoom {
                 height: 100%;
                 .card-md {
-                    margin: 5px;
+                    margin: 4px;
                     border-radius: 2px;
-                    width: calc(100% - 10px);
+                    width: calc(100% - 8px);
                     -webkit-box-shadow: 
                         0 0 0 0 rgba(0, 0, 0, 0.25), 
                         0 0 0 0 rgba(0, 0, 0, 0.2), 
@@ -27,14 +33,19 @@ page-purchase {
                 }
             }        
             ion-card {
-                height: 80%;    
-            }
-            // ion-card.delivery-details-card {
+                height: 90%;    
                  
-            // }
-            // ion-card.delivery-options-card {
-                    
-            // }
+            }
+            .product-list-wrapper {
+                height: 70%;
+                overflow-y: scroll;
+            }
+            .payment-indetails {
+                height: 30%;
+                width: 100%;
+                // font-size: 2em;
+                text-align: start;
+            }
 
         } 
     }

@@ -2,17 +2,23 @@ page-account {
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
     ion-icon.demo-icon-center-title {
         font-size: 4.5rem !important;
-      }
-      ion-content {
-          ion-icon.blank-user-icon {
+    }
+    ion-content {
+        ion-icon.blank-user-icon {
             font-size: 7em !important;
       
-          }
-      }
+        }
+    }
+
+            button.account-menu-item {
+                border-bottom: 1px !important;
+                border-bottom-color: lightgray !important;
+            }
+
     ion-toolbar.account-toolbar {
         width: 100%;
-        height: 7vh;
+        height: 12vh;
         // color: ghostwhite;
-
     }
+
 }

@@ -6,6 +6,7 @@ import { HttpClient, HttpResponse, HttpHeaders, HttpRequest } from '@angular/com
 import { AuthResponse } from '../../../models/custom-auth-models/auth-response.interface';
 import { ServerResponse } from '../../../models/custom-auth-models/server-response.interface';
 import { Provider } from '../../../models/provider.enum';
+import { UserDataBase } from '../../../models/user-data-base.interface';
 
 @Injectable()
 export class UserApiService {
@@ -84,13 +85,23 @@ export class UserApiService {
         }
     }
 
-
+    public async postUserPaymentSource(headers: HttpHeaders, requestBody: { source }) {
+        console.log(`postUserPaymentSource(${headers}, ${requestBody})`);
+        const queryUrl = this.rootRoute + this.curSubRoute + 'source/';
+        try {
+            const res = await this.httpClient.post<ServerResponse<AuthResponse>>(queryUrl, requestBody,
+                { headers, observe: 'response' }).toPromise();
+            console.log(res);
+            return res.body.data;
+        } catch (e) {
+            throw e;
+        }
+    }
     
     /** 
      * @deprecated
      * not in use at the moment
-    */
-    
+    */ 
     public async postRenewToken(headers: HttpHeaders, requestBody: { newToken: string }) {
         console.log(`postRenewToken(${headers}, ${requestBody})`);
         const queryUrl = this.rootRoute + this.curSubRoute + 'me/token/';

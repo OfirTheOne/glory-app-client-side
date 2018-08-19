@@ -50,8 +50,13 @@
       <h2 class="bag-title" text-center>Your Bag</h2>
       <hr>
       <div text-center class="pt-2">
-        <h2 *ngIf="cart.length == 1;">1 Item</h2>
-        <h2 *ngIf="cart.length > 1;">{{cart.length}} Items</h2>
+        <h2>
+          <span *ngIf="cart.length == 1;">1 Item</span>
+          <span *ngIf="cart.length > 1;">{{cart.length}} Items</span>
+          <span class="my-2">/</span>
+          <span>Total: {{totalCartCost}}</span>
+          <!-- <span>(shipping not included)</span> -->
+        </h2>
         <hr class="pb-1">
       </div>
       <ion-list>
@@ -91,11 +96,8 @@
 <ion-footer no-border>
   <ion-toolbar *ngIf="isUserSign === true;">
     <ion-row class="vertical-align-content">
-      <ion-col offset-2 col-4>
-        <ion-title>Total : {{totalCartCost}} </ion-title>
-      </ion-col>
-      <ion-col col-4>
-        <button ion-button outline [disabled]="cart.length==0" (click)="onChackOut()">Chack Out</button>
+      <ion-col offset-3 col-6>
+        <button ion-button outline block [disabled]="cart.length==0" (click)="onChackOut()">Chack Out</button>
       </ion-col>
     </ion-row>
   </ion-toolbar>

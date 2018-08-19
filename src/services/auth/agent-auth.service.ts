@@ -25,14 +25,16 @@ export class AgentAuthService {
     // dispatch when google and facebook plugin is loaded.  
     private authResourcesInitEvent: Subject<void> = new Subject();
 
-    private userStatusChangeEvent: Subject<void> = new Subject();
+    public signInInitStatus: Subject<any> = new Subject();
+
+    // private userStatusChangeEvent: Subject<void> = new Subject();
 
     // flag, set to true when all auth related resources are loaded.
     private isAuthResInit: boolean = false;
 
     constructor(
-        private custom: CAS, // auth strategy 01
-        private google: GAS, // auth strategy 02
+        private custom: CAS,   // auth strategy 01
+        private google: GAS,   // auth strategy 02
         private facebook: FAS, // auth strategy 03
         private environment: EnvironmentService
     ) {
@@ -54,12 +56,13 @@ export class AgentAuthService {
                     providerName: this.authStrategy.getProviderName(),
                     token: this.authStrategy.getToken()
                 });
-                console.log(`onSignIn authStrategy ${this.authStrategy.getToken()}`);
-                console.log(`onSignIn sdm ${this.sdm.getDeclaredSignData().token}`);
-                this.userStatusChangeEvent.next();
+                this.signInInitStatus.next(true);
+                console.log(`onSignIn authStrategy - next true`);
                 return res;
             } catch (error) {
                 console.log(error);
+                this.signInInitStatus.next(false);
+                console.log(`onSignIn authStrategy - next false`);
             }
         }
     }
@@ -72,7 +75,7 @@ export class AgentAuthService {
             try {
                 this.sdm.undeclareSignData();
                 const res = await this.authStrategy.onSignOut();
-                this.userStatusChangeEvent.next();
+                // this.userStatusChangeEvent.next();
                 return res;
                 
             } catch (error) {
@@ -106,12 +109,26 @@ export class AgentAuthService {
         return signStatus;
     }
 
-    // update the signed in user data to the db.
+    // update the signed in user data and send it to the db.
     public async onUpdateUserData(userData:
         { firstName: string, lastName: string, gender: string, birthDate: any }): Promise<boolean> {
         try {
             if (this.isSignIn()) {
                 let res = await this.authStrategy.onUpdateUserData(userData);
+                console.log(res);
+                return true;
+            }
+        } catch (e) {
+            console.log(e);
+            return false;
+        }
+    }
+
+    // add payment method the signed in user and send it to the db.
+    public async onAddPaymentMethod(source): Promise<boolean> {
+        try {
+            if (this.isSignIn()) {
+                let res = await this.authStrategy.onAddPaymentMethod(source);
                 console.log(res);
                 return true;
             }
@@ -135,15 +152,14 @@ export class AgentAuthService {
         return this.authStrategy ? this.authStrategy.getAuthHeader() : undefined;
     }
 
-    // method used for subscribing to an event the will triger on eny sign user releted action.
-    public userStatusChangeEventSubscribe(callback: () => void): Subscription {
-        return this.userStatusChangeEvent.subscribe(callback);
+    // // method used for subscribing to an event the will triger on eny sign user releted action.
+    // public userStatusChangeEventSubscribe(callback: () => void): Subscription {
+    //     return this.userStatusChangeEvent.subscribe(callback);
+    // }
+
+    public updateUserOnPostUserDataRequest(authResponse: AuthResponse) {
+        this.authStrategy.updateUserDbProfileOnAuthResponse(authResponse);
     }
-
-
-        public updateUserOnPostUserDataRequest(authResponse: AuthResponse) {
-            this.authStrategy.updateUserDbProfileOnAuthResponse(authResponse);
-        }
 
 
     // * resources events related * //
@@ -186,13 +202,16 @@ export class AgentAuthService {
             try {
                 if (this.sdm.isDeclared()) {
                     await this.getUserDataOnInit();
-
+                    this.signInInitStatus.next(true);
+                    console.log(`authStrategy signInInitStatus - next true`);
                 }
-            } catch (e) {
-                console.log(e);
+            } catch (error) {
+                console.log(error);
                 // removing data from the L.S only if the request returned unauthorized error
-                if ('status' in e && e.status == 401) {
+                if ('status' in error && error.status == 401) {
                     this.sdm.undeclareSignData();
+                    this.signInInitStatus.next(false);
+                    console.log(`authStrategy signInInitStatus - next false`);
                 }
             }
             this.isAuthResInit = true;
@@ -261,7 +280,7 @@ export class AgentAuthService {
  *  with the fileds 'sign_p' (provider) and 'sign_t' (token), we refer to that object as 'signData'.
  *  The class that in charge on all related actions is 'SignDeclaretionManeger'.
  */
-class SignDeclaretionManeger {
+export class SignDeclaretionManeger {
     private readonly providerKeyName = 'sign_p';
     private readonly tokenKeyName = 'sign_t';
 

@@ -70,3 +70,92 @@
 .py-1 { padding-top: 4px !important; padding-bottom: 4px !important; }
 .py-2 { padding-top: 8px !important; padding-bottom: 8px !important; }
 .py-4 { padding-top: 16px !important; padding-bottom: 16px !important; }
+
+
+
+
+
+
+// *********************************************************************************
+
+$balancer: 4px;
+
+// *********
+// margin
+// *********
+
+// m-x1-x2-x3-x4 class structure
+@mixin marginSurroundCombination($top, $right, $bottom, $left) {
+    .m-#{$top}-#{$right}-#{$bottom}-#{$left} { 
+      margin: 
+        #{$top*$balancer}, 
+        #{$right*$balancer}, 
+        #{$bottom*$balancer}, 
+        #{$left*$balancer};
+    }
+}
+@for $i from 0 through 4 {
+  @for $j from 0 through 4 {
+    @for $k from 0 through 4 {
+      @for $l from 0 through 4 {
+        @include marginSurroundCombination($i, $j, $k, $l);
+      }
+    }
+  }
+}
+
+// m-x class structure
+@mixin marginSurround($surround) {
+    .m-#{$surround} { 
+      margin: 
+        #{$surround*$balancer}, 
+        #{$surround*$balancer}, 
+        #{$surround*$balancer}, 
+        #{$surround*$balancer}; 
+    }
+}
+@for $i from 0 through 4 {
+  @include marginSurround($i);
+}
+
+
+
+
+
+// *********
+// padding
+// *********
+
+// p-x1-x2-x3-x4 class structure
+@mixin paddingSurroundCombination($top, $right, $bottom, $left) {
+    .p-#{$top}-#{$right}-#{$bottom}-#{$left} { 
+      padding: 
+        #{$top*$balancer}, 
+        #{$right*$balancer}, 
+        #{$bottom*$balancer}, 
+        #{$left*$balancer};
+    }
+}
+@for $i from 0 through 4 {
+  @for $j from 0 through 4 {
+    @for $k from 0 through 4 {
+      @for $l from 0 through 4 {
+        @include paddingSurroundCombination($i, $j, $k, $l);
+      }
+    }
+  }
+}
+
+// p-x class structure
+@mixin paddingSurround($surround) {
+    .p-#{$surround} { 
+      padding: 
+        #{$surround*$balancer}, 
+        #{$surround*$balancer}, 
+        #{$surround*$balancer}, 
+        #{$surround*$balancer};
+    }
+}
+@for $i from 0 through 4 {
+  @include paddingSurround($i);
+}

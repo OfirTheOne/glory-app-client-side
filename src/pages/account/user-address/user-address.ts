@@ -1,8 +1,8 @@
-import { UserApiService } from './../../../services/api-services/user-api/user-api.service';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { AgentAuthService } from '../../../services/auth/agent-auth.service';
-import { FormGroup, FormControl } from '../../../../node_modules/@angular/forms';
+import { FormGroup, FormControl } from '@angular/forms';
+
+import { AgentAuthService, UserApiService } from '../../../services';
 
 /**
  * Generated class for the UserAddressPage page.

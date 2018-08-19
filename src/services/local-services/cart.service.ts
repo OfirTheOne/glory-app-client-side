@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import * as moment from 'moment';
 
-import { AgentAuthService } from './../auth/agent-auth.service';
-import { CartApiService } from './../api-services/cart-api.service';
+import { AgentAuthService } from '../auth/agent-auth.service';
+import { CartApiService } from '../api-services/cart-api.service';
 
 import { CartProduct } from '../../models/store-models/cart-product.interface';
 

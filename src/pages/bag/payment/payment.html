@@ -1,0 +1,389 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-buttons right>
+      <button ion-button icon-only (click)="onExit()">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons left>
+      <button disabled left ion-button icon-only>
+        <ion-icon name="arrow-back" class="demo-icon-center-title"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title text-center>GLORY</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+
+<ion-content padding>
+
+
+  <!-- *************** Prograss Bar *************** -->
+  <div class="prograss-bar-container">
+    <ion-navbar class="text-center">
+      <ion-grid>
+        <ion-row>
+
+          <!-- icon 1 -->
+          <ion-col col-auto text-center>
+            <div [ngClass]="{'icon-done-step': slides.getActiveIndex() >= 0 }" text-center class="step-icon" (click)="goToSlide(0)">
+              <ion-icon name="paper-plane"></ion-icon>
+            </div>
+          </ion-col>
+
+          <!-- pipe 1 -->
+          <ion-col class="h-fit-contant my-auto" no-padding>
+            <div [ngClass]="{'pipe-done-step' : slides.getActiveIndex() > 0 }" class="step-pipe pipe-not-done-step">
+            </div>
+          </ion-col>
+
+          <!-- icon 2 -->
+          <ion-col col-auto text-center>
+            <div [ngClass]="{'icon-done-step': slides.getActiveIndex() >= 1, 'not-done-step': 1 > slides.getActiveIndex() }" text-center
+              class="step-icon">
+              <ion-icon name="lock"></ion-icon>
+            </div>
+          </ion-col>
+
+          <!-- pipe 2 -->
+          <ion-col class="h-fit-contant my-auto" no-padding>
+            <div [ngClass]="{'pipe-done-step' : slides.getActiveIndex() > 1 }" class="step-pipe pipe-not-done-step"></div>
+          </ion-col>
+
+          <!-- icon 3 -->
+          <ion-col col-auto text-center>
+            <div [ngClass]="{'icon-done-step': slides.getActiveIndex() >= 2, 'not-done-step': 2 > slides.getActiveIndex() }" text-center
+              class="step-icon">
+              <ion-icon name="list"></ion-icon>
+            </div>
+          </ion-col>
+
+          <!-- pipe 3 -->
+          <ion-col class="h-fit-contant my-auto" no-padding>
+            <div [ngClass]="{'pipe-done-step' : slides.getActiveIndex() > 2 }" class="step-pipe pipe-not-done-step"></div>
+          </ion-col>
+
+          <!-- icon 3 -->
+          <ion-col col-auto text-center>
+            <div [ngClass]="{'icon-done-step': slides.getActiveIndex() >= 3, 'not-done-step': 3 > slides.getActiveIndex() }" text-center
+              class="step-icon">
+              <ion-icon name="done-all"></ion-icon>
+            </div>
+          </ion-col>
+
+        </ion-row>
+      </ion-grid>
+    </ion-navbar>
+  </div>
+
+
+  <!-- *************** Slider / Step Contant *************** -->
+  <ion-slides class="h-80" padding-top #Slides>
+
+    <!-- step 1 - Delivery Details -->
+    <ion-slide>
+      <h2 class="text-center">Delivery Details</h2>
+      <ion-card>
+        <ion-card-content>
+          <!-- Delivery Address -->
+          <ion-grid text-left>
+            <ion-row>
+              <ion-col class="h-fit-contant my-auto" no-padding col-10>
+                <h2 class="text-bold">Delivery Address</h2>
+              </ion-col>
+              <ion-col col-2>
+                <button ion-button clear small icon-only>
+                  <ion-icon name="create"></ion-icon>
+                </button>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col no-padding>
+                <span>Ofir G</span>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col no-padding>
+                <!-- <span>Hamalhim 67</span> -->
+                <span>{{address?.address}}</span>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col no-padding>
+                  <!-- <span>Hamalhim 67</span> -->
+                  <span>{{address?.city}}</span>
+                </ion-col>
+              </ion-row>
+            <ion-row>
+              <ion-col no-padding>
+                <!-- <span>73457</span> -->
+                <span>{{address?.postcode}}</span>
+              </ion-col>
+            </ion-row>
+            <!-- <ion-row>
+              <ion-col no-padding>
+                <span>0504446914</span>
+              </ion-col>
+            </ion-row> -->
+          </ion-grid>
+
+          <hr class="my-4">
+
+          <!-- Delivery Options -->
+          <ion-grid radio-group text-left>
+            <ion-row>
+              <ion-col class="h-fit-contant my-auto" no-padding col-10>
+                <h2 class="text-bold">Delivery Options</h2>
+              </ion-col>
+            </ion-row>
+
+            <ion-row padding-top>
+              <ion-col no-padding col-2>
+                <div class="h-auto mt-1">
+                  <ion-radio (ionSelect)="onDeliveryOptionSelect($event)" value="standard" checked>
+                  </ion-radio>
+                </div>
+              </ion-col>
+              <ion-col no-padding>
+                <p ion-text>Standard Shipping</p>
+              </ion-col>
+            </ion-row>
+
+            <ion-row>
+              <ion-col no-padding col-2></ion-col>
+              <ion-col no-padding>
+                <span ion-text>$5</span>
+              </ion-col>
+            </ion-row>
+
+            <ion-row class="mt-2">
+              <ion-col no-padding col-2>
+                <div class="h-auto mt-1">
+                  <ion-radio (ionSelect)="onDeliveryOptionSelect($event)" value="express">
+                  </ion-radio>
+                </div>
+              </ion-col>
+              <ion-col no-padding>
+                <p ion-text>Express Shipping</p>
+              </ion-col>
+            </ion-row>
+
+            <ion-row>
+              <ion-col no-padding col-2></ion-col>
+              <ion-col no-padding>
+                <span ion-text>$10</span>
+              </ion-col>
+            </ion-row>
+
+          </ion-grid>
+
+        </ion-card-content>
+      </ion-card>
+    </ion-slide>
+
+
+
+    <!-- step 2 - Review Order -->
+    <ion-slide>
+      <h2 class="text-center">Review Your Order</h2>
+      <ion-card>
+        <ion-card-content class="product-list-wrapper">
+          <ion-grid>
+            <ion-row>
+              <ion-col >
+                <ion-list>
+                  <ion-item no-padding *ngFor="let cartProduct of products">
+                    <ion-thumbnail class="pl-0" item-start>
+                      <img src="{{cartProduct.product.imagePath[0]}}">
+                    </ion-thumbnail>
+                    <ion-row>
+                      <ion-col>
+                        <h2>{{cartProduct.product.description}}</h2>
+                      </ion-col>
+                    </ion-row>
+                    <ion-row>
+                      <ion-col>
+                        <p>Size: {{cartProduct.size}}</p>
+                        <p>
+                          <span>Qty: {{cartProduct.amount}}</span>
+                          <span class="mx-1 text-bold"> | </span>
+                          <span>Price: {{cartProduct.product.price}} $</span>
+                        </p>
+                      </ion-col>
+                    </ion-row>
+                  </ion-item>
+                </ion-list>
+              </ion-col>
+            </ion-row>
+          </ion-grid> 
+         
+        </ion-card-content>
+         <!--   -->
+         <div  class="payment-indetails bg-3rd">
+            <ion-grid>
+              <ion-row>
+                <ion-col col-10>
+                  <p>
+                    <span>Subtotal: </span>
+                  </p>
+                </ion-col>
+                <ion-col>
+                  <p>
+                    <span>{{subtotal}}</span>
+                  </p>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col col-10>
+                  <p>
+                    <span>Delivery: </span>
+                  </p>
+                </ion-col>
+                <ion-col>
+                  <p>
+                    <span>{{deliveryFeed}}</span>
+                  </p>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col col-10>
+                  <p class="text-bold">
+                    <span>Total: </span>
+                  </p>
+                </ion-col>
+                <ion-col>
+                  <p>
+                    <span>{{subtotal+deliveryFeed}}</span>
+                  </p>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+  
+          </div>
+        <!-- <div class="h-100"style="position: relative;"> -->
+
+
+        <!-- </div> -->
+      </ion-card>
+    </ion-slide>
+
+
+
+    <!-- step 3 - Payment Details -->
+    <ion-slide>
+      <h2 class="text-center">Payment Details</h2>
+      <ion-card>
+        <ion-card-content>
+          <ion-grid radio-group text-left>
+            <ion-row>
+              <ion-col no-padding col-10 offset-1>
+                <h2 text-center class="text-bold">Payment Method</h2>
+              </ion-col>
+            </ion-row>
+
+            <!-- PayPal -->
+            <ion-row class="mt-4">
+              <ion-col>
+                <div class="mx-4" (click)="onPaymentSourceSelected('Paypal', undefined)">
+                  <img src="https://woocommerce.com/wp-content/uploads/2016/04/PayPal-Express@2x.png" alt="Chack Out with PayPal">
+                </div>
+              </ion-col>
+            </ion-row>
+
+            <!-- Stripe / Credit Card  -->
+            <ion-row>
+              <ion-col text-center>
+                <div class="my-4">
+                  <hr class="my-auto">
+                </div>
+              </ion-col>
+              <ion-col col-2 text-center>
+                <p class="mt-2">
+                  <span>Or</span>
+                </p>
+              </ion-col>
+              <ion-col text-center>
+                <div class="my-4">
+                  <hr class="my-auto">
+                </div>
+              </ion-col>
+            </ion-row>
+
+            <ion-row>
+              <ion-col>
+                  <ion-list>
+                        <button 
+                          ion-item class="border br-3rd" 
+                          *ngFor="let source of existingSources"
+                          (click)="onPaymentSourceSelected('credit-card', source)">
+                          <ion-icon name="card" item-start></ion-icon>
+                          <p>
+                            <span class="ml-2 mr-4">{{source.brand}}</span>
+                            <span>****</span>
+                            <span>{{source.last4}}</span>
+                          </p>
+                        </button>
+                    </ion-list>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-12>
+                <button 
+                  ion-button block 
+                  (click)="onSubmitOrder()"
+                  class="width-75 mx-auto">Submit Order</button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card-content>
+      </ion-card>
+    </ion-slide>
+
+
+
+    <!-- step 4 -->
+    <ion-slide>
+      <h2 class="text-center">Order Details</h2>
+      <ion-card>
+        <ion-card-content>
+          <p>
+            The most popular industrial group ever, and largely responsible for bringing the music to a mass audience.
+          </p>
+        </ion-card-content>
+      </ion-card>
+    </ion-slide>
+
+  </ion-slides>
+
+  <!-- *************** Buttons / Step Controllers *************** -->
+  <ion-grid class="mt-2">
+    <ion-row>
+
+      <!-- back -->
+      <ion-col offset-1 col-2>
+        <button  *ngIf="!slides.isEnd()" ion-button icon-only block color="light" [disabled]="Slides.isBeginning()" (click)="goToPrevSlide()" class="mr-1">
+          <ion-icon name="ios-arrow-back"></ion-icon>
+        </button>
+      </ion-col>
+
+      <ion-col col-6>
+        <div *ngIf="slides.isEnd()" class="w-75 mx-auto w-fit-contant">
+          <button ion-button block color="light" [disabled]="!slides.isEnd()">
+            Done
+          </button>
+        </div>
+      </ion-col>
+
+      <!-- next -->
+      <ion-col col-2>
+        <button *ngIf="!slides.isEnd()" ion-button icon-only block color="light" [disabled]="slides.getActiveIndex()==2" (click)="goToNextSlide()" class="ml-1">
+          <ion-icon name="ios-arrow-forward"></ion-icon>
+        </button>
+      </ion-col>
+
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

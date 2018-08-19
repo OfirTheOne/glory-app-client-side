@@ -102,6 +102,23 @@ export abstract class AuthStrategyService {
         }
     }
 
+    public async onAddPaymentMethod(source) {
+        const headers = this.getAuthHeader();
+        const body = { source };
+        try {
+            const res = await this.userApi.postUserPaymentSource(headers, body);
+            if(this.authenticateServerResponse(res)) {
+                this.userDbProfile = res.user;
+            }
+            console.log(res);
+            return res;
+        } catch (e) {
+            console.log(e);
+            throw e;
+        }
+    }
+
+
     public updateUserDbProfileOnAuthResponse(authResponse: AuthResponse) {
         console.log(`updateUserObjectAfterPostUserDataRequest(${authResponse})`);
         

@@ -1,38 +1,71 @@
 
+
+$my_colors: (
+    1st: #0000ff,
+    2nd: #0000ff,
+    3rd: #f3f3f3, // soft gray
+    4th: #0000ff,
+    5th: #0000ff,
+    6th: #0000ff,
+  );
+  
+
 // color
-.color-1st { color: map-get($colors, '1st') !important; }
-.color-2nd { color: map-get($colors, '2nd') !important; }
-.color-3rd { color: map-get($colors, '3rd') !important; }
-.color-4th { color: map-get($colors, '4th') !important; }
-.color-5th { color: map-get($colors, '5th') !important; }
-.color-6th { color: map-get($colors, '6th') !important; } 
+.color-1st { color: map-get($my_colors, 1st) !important; }
+.color-2nd { color: map-get($my_colors, 2nd) !important; }
+.color-3rd { color: map-get($my_colors, 3rd) !important; }
+.color-4th { color: map-get($my_colors, 4th) !important; }
+.color-5th { color: map-get($my_colors, 5th) !important; }
 .color-trn { color: transparent !important; } 
 
 // background-color
-.bg-1st { background-color: map-get($colors, '1st') !important; }
-.bg-2nd { background-color: map-get($colors, '2nd') !important; }
-.bg-3rd { background-color: map-get($colors, '3rd') !important; }
-.bg-4th { background-color: map-get($colors, '4th') !important; }
-.bg-5th { background-color: map-get($colors, '5th') !important; }
-.bg-6th { background-color: map-get($colors, '6th') !important; }
+.bg-1st { background-color: map-get($my_colors, 1st) !important; }
+.bg-2nd { background-color: map-get($my_colors, 2nd) !important; }
+.bg-3rd { background-color: map-get($my_colors, 3rd) !important; }
+.bg-4th { background-color: map-get($my_colors, 4th) !important; }
+.bg-5th { background-color: map-get($my_colors, 5th) !important; }
+.bg-6th { background-color: map-get($my_colors, 6th) !important; }
 .bg-trn { background-color: transparent !important; }
 
 
 // border-color
-.br-1st { border-color: map-get($colors, '1st') !important; }
-.br-2nd { border-color: map-get($colors, '2nd') !important; }
-.br-3rd { border-color: map-get($colors, '3rd') !important; }
-.br-4th { border-color: map-get($colors, '4th') !important; }
-.br-5th { border-color: map-get($colors, '5th') !important; }
-.br-6th { border-color: map-get($colors, '6th') !important; }
+
+.border {
+    border-style: solid;
+}
+
+.border-right {
+    border-right-style: solid;
+}
+
+.border-left {
+    border-left-style: solid;
+}
+
+.border-bottom {
+    border-bottom-style: solid;
+}
+
+.border-top {
+    border-top-style: solid;
+}
+
+
+
+.br-1st { border-color: map-get($my_colors, 1st) !important; }
+.br-2nd { border-color: map-get($my_colors, 2nd) !important; }
+.br-3rd { border-color: map-get($my_colors, 3rd) !important; }
+.br-4th { border-color: map-get($my_colors, 4th) !important; }
+.br-5th { border-color: map-get($my_colors, 5th) !important; }
+.br-6th { border-color: map-get($my_colors, 6th) !important; }
 .br-trn { border-color: transparent !important; }
 
 // outline-color
-.ol-1st { outline-color: map-get($colors, '1st') !important; }
-.ol-2nd { outline-color: map-get($colors, '2nd') !important; }
-.ol-3rd { outline-color: map-get($colors, '3rd') !important; }
-.ol-4th { outline-color: map-get($colors, '4th') !important; }
-.ol-5th { outline-color: map-get($colors, '5th') !important; }
-.ol-6th { outline-color: map-get($colors, '6th') !important; }
+.ol-1st { outline-color: map-get($my_colors, 1st) !important; }
+.ol-2nd { outline-color: map-get($my_colors, 2nd) !important; }
+.ol-3rd { outline-color: map-get($my_colors, 3rd)!important; }
+.ol-4th { outline-color: map-get($my_colors, 4th) !important; }
+.ol-5th { outline-color: map-get($my_colors, 5th) !important; }
+.ol-6th { outline-color: map-get($my_colors, 6th) !important; }
 .ol-trn { outline-color: transparent !important; }
 

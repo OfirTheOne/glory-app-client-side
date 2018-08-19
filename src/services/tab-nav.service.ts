@@ -1,6 +1,6 @@
 import { Subscription } from 'rxjs/Subscription';
 import { Subject } from 'rxjs/Subject';
-import { Injectable } from "../../node_modules/@angular/core";
+import { Injectable } from '@angular/core';
 
 @Injectable()
 export class TabNavService {

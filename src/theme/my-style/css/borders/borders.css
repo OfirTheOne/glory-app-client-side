@@ -1,0 +1,47 @@
+.border-t-solid {
+  border-top: 1px solid !important; }
+
+.border-t-dashed {
+  border-top: 1px dashed !important; }
+
+.border-t-dotted {
+  border-top: 1px dotted !important; }
+
+.border-t-double {
+  border-top: 1px double !important; }
+
+.border-r-solid {
+  border-right: 1px solid !important; }
+
+.border-r-dashed {
+  border-right: 1px dashed !important; }
+
+.border-r-dotted {
+  border-right: 1px dotted !important; }
+
+.border-r-double {
+  border-right: 1px double !important; }
+
+.border-b-solid {
+  border-bottom: 1px solid !important; }
+
+.border-b-dashed {
+  border-bottom: 1px dashed !important; }
+
+.border-b-dotted {
+  border-bottom: 1px dotted !important; }
+
+.border-b-double {
+  border-bottom: 1px double !important; }
+
+.border-l-solid {
+  border-left: 1px solid !important; }
+
+.border-l-dashed {
+  border-left: 1px dashed !important; }
+
+.border-l-dotted {
+  border-left: 1px dotted !important; }
+
+.border-l-double {
+  border-left: 1px double !important; }
