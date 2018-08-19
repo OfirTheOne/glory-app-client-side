@@ -17,6 +17,22 @@ import { PaymentMethodsPage } from './account/payment-methods/payment-methods';
 import { AccountPage } from './account/account';
 import { TabsPage } from './tabs/tabs';
 
+import { LoadPageModule } from './load/load.module';
+import { SignUpPageModule } from './auth/sign-up/sign-up.module';
+import { SignInPageModule } from './auth/sign-in/sign-in.module';
+import { FullImgPageModule } from './item/full-img/full-img.module';
+import { ItemPageModule } from './item/item.module';
+import { ItemsGridPageModule } from './store/items-grid/items-grid.module';
+import { CategoriesPageModule } from './store/categories/categories.module';
+import { StoreViewbyPageModule } from './store/store-viewby/store-viewby.module';
+import { FavPageModule } from './fav/fav.module';
+import { PaymentPageModule } from './bag/payment/payment.module';
+import { BagPageModule } from './bag/bag.module';
+import { UserAddressPageModule } from './account/user-address/user-address.module';
+import { UserDetailsPageModule } from './account/user-details/user-details.module';
+import { PaymentMethodsPageModule } from './account/payment-methods/payment-methods.module';
+import { AccountPageModule } from './account/account.module';
+
 
 export const pagesArray: any[] = [
     LoadPage,
@@ -37,6 +53,25 @@ export const pagesArray: any[] = [
     TabsPage,
 ];
 
+
+export const pagesModuleArray: any[] = [
+    LoadPageModule,
+    SignUpPageModule,
+    SignInPageModule,
+    FullImgPageModule,
+    ItemPageModule,
+    ItemsGridPageModule,
+    CategoriesPageModule,
+    StoreViewbyPageModule,
+    FavPageModule,
+    PaymentPageModule,
+    BagPageModule,
+    UserAddressPageModule,
+    UserDetailsPageModule,
+    PaymentMethodsPageModule,
+    AccountPageModule,
+];
+
 export { LoadPage } from './load/load';
 export { SignUpPage } from './auth/sign-up/sign-up';
 export { SignInPage } from './auth/sign-in/sign-in';
@@ -53,3 +88,19 @@ export { UserDetailsPage } from './account/user-details/user-details';
 export { PaymentMethodsPage } from './account/payment-methods/payment-methods';
 export { AccountPage } from './account/account';
 export { TabsPage } from './tabs/tabs';
+
+export { LoadPageModule } from './load/load.module';
+export { SignUpPageModule } from './auth/sign-up/sign-up.module';
+export { SignInPageModule } from './auth/sign-in/sign-in.module';
+export { FullImgPageModule } from './item/full-img/full-img.module';
+export { ItemPageModule } from './item/item.module';
+export { ItemsGridPageModule } from './store/items-grid/items-grid.module';
+export { CategoriesPageModule } from './store/categories/categories.module';
+export { StoreViewbyPageModule } from './store/store-viewby/store-viewby.module';
+export { FavPageModule } from './fav/fav.module';
+export { PaymentPageModule } from './bag/payment/payment.module';
+export { BagPageModule } from './bag/bag.module';
+export { UserAddressPageModule } from './account/user-address/user-address.module';
+export { UserDetailsPageModule } from './account/user-details/user-details.module';
+export { PaymentMethodsPageModule } from './account/payment-methods/payment-methods.module';
+export { AccountPageModule } from './account/account.module';

@@ -15,7 +15,7 @@ const stripeTestKey = 'pk_test_qe0umqOpJ81LK97pWL0x1k8J';
 
 @Component({
     selector: 'app-stripe-payment-form',
-    templateUrl: './stripe-payment-form.component.html',
+    templateUrl: './stripe-payment-form.html',
 })
 
 export class StripePaymentFormComponent implements OnInit {

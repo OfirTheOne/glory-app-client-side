@@ -9,5 +9,6 @@ import { AccountPage } from './account';
   imports: [
     IonicPageModule.forChild(AccountPage),
   ],
+  exports: [AccountPage]
 })
 export class AccountPageModule {}
