@@ -11,6 +11,7 @@ import { StripePaymentFormComponent } from '../../../components/stripe-payment-f
     IonicPageModule.forChild(PaymentMethodsPage),
   ],
   exports: [
+    StripePaymentFormComponent,
     PaymentMethodsPage,
   ],
 })
