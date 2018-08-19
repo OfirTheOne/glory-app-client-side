@@ -9,7 +9,6 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 // components
 import { MyApp } from './app.component';
 import { componentsArray, StripePaymentFormComponent } from '../components';
-import { directivesArray } from '../directives';
 
 // import { StripePaymentFormModule } from './../components/stripe-payment-form/stripe-payment-form.module';
 
