@@ -4,10 +4,13 @@ import { UserAddressPage } from './user-address';
 
 @NgModule({
   declarations: [
-    UserAddressPage,
+    UserAddressPage
   ],
   imports: [
     IonicPageModule.forChild(UserAddressPage),
+  ],
+  exports: [
+    UserAddressPage,
   ],
 })
 export class UserAddressPageModule {}

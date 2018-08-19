@@ -9,5 +9,8 @@ import { FavPage } from './fav';
   imports: [
     IonicPageModule.forChild(FavPage),
   ],
+  exports: [
+    FavPage,
+  ],
 })
 export class FavPageModule {}

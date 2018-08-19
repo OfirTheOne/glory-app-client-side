@@ -9,5 +9,8 @@ import { BagPage } from './bag';
   imports: [
     IonicPageModule.forChild(BagPage),
   ],
+  exports: [
+    BagPage,
+  ],
 })
 export class BagPageModule {}

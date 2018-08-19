@@ -9,5 +9,8 @@ import { FullImgPage } from './full-img';
   imports: [
     IonicPageModule.forChild(FullImgPage),
   ],
+  exports: [
+    FullImgPage,
+  ],
 })
 export class FullImgPageModule {}

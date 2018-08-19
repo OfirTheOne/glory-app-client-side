@@ -9,5 +9,8 @@ import { LoadPage } from './load';
   imports: [
     IonicPageModule.forChild(LoadPage),
   ],
+  exports: [
+    LoadPage,
+  ],
 })
 export class LoadPageModule {}

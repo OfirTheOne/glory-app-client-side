@@ -9,5 +9,8 @@ import { StoreViewbyPage } from './store-viewby';
   imports: [
     IonicPageModule.forChild(StoreViewbyPage),
   ],
+  exports: [
+    StoreViewbyPage,
+  ],
 })
 export class StoreViewbyPageModule {}

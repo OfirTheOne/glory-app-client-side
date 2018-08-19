@@ -9,5 +9,8 @@ import { ItemsGridPage } from './items-grid';
   imports: [
     IonicPageModule.forChild(ItemsGridPage),
   ],
+  exports: [
+    ItemsGridPage,
+  ],
 })
 export class ItemsGridPageModule {}

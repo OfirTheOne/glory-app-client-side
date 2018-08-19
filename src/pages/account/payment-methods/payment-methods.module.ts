@@ -9,5 +9,8 @@ import { PaymentMethodsPage } from './payment-methods';
   imports: [
     IonicPageModule.forChild(PaymentMethodsPage),
   ],
+  exports: [
+    PaymentMethodsPage,
+  ],
 })
 export class PaymentMethodsPageModule {}
