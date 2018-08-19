@@ -58,9 +58,10 @@ import { servicesArray } from '../services';
   declarations: [
     TabsPage,
     MyApp,
+    // StripePaymentFormComponent
     // ...directivesArray,
     // ...componentsArray,
-    PaymentMethodsPage
+    // PaymentMethodsPage
     // LoadPage,
     // SignUpPage,
     // SignInPage,
@@ -81,12 +82,12 @@ import { servicesArray } from '../services';
     BrowserModule,
     HttpClientModule,
     IonicModule.forRoot(MyApp),
-    StripePaymentFormModule,
+    
     PaymentPageModule,
     BagPageModule,
     UserAddressPageModule,
     UserDetailsPageModule,
-    // PaymentMethodsPageModule,
+    PaymentMethodsPageModule,
     StoreViewbyPageModule,
     FavPageModule,
     ItemsGridPageModule,
@@ -119,7 +120,6 @@ import { servicesArray } from '../services';
     AccountPage,
     TabsPage,
     MyApp,
-    StripePaymentFormComponent,
   ],
   providers: [
     StatusBar,
