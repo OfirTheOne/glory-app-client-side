@@ -27,6 +27,7 @@ export class AgentAuthService {
 
     public signInInitStatus: Subject<any> = new Subject();
 
+    private userAuthenticationChangeEvent: Subject<boolean> = new Subject();
     // private userStatusChangeEvent: Subject<void> = new Subject();
 
     // flag, set to true when all auth related resources are loaded.
@@ -57,6 +58,7 @@ export class AgentAuthService {
                     token: this.authStrategy.getToken()
                 });
                 this.signInInitStatus.next(true);
+                this.userAuthenticationChangeEventDispacher(true);
                 console.log(`onSignIn authStrategy - next true`);
                 return res;
             } catch (error) {
@@ -74,6 +76,7 @@ export class AgentAuthService {
         } else {
             try {
                 this.sdm.undeclareSignData();
+                this.userAuthenticationChangeEventDispacher(false);
                 const res = await this.authStrategy.onSignOut();
                 // this.userStatusChangeEvent.next();
                 return res;
@@ -107,6 +110,14 @@ export class AgentAuthService {
             }
         }
         return signStatus;
+    }
+
+    public userAuthenticationChangeEventSubscribe(callback: (value: boolean) => void): Subscription {
+        return this.userAuthenticationChangeEvent.subscribe(callback);
+    }
+
+    private userAuthenticationChangeEventDispacher(userAuthenticate: boolean) {
+        this.userAuthenticationChangeEvent.next(userAuthenticate);
     }
 
     // update the signed in user data and send it to the db.
@@ -203,6 +214,7 @@ export class AgentAuthService {
                 if (this.sdm.isDeclared()) {
                     await this.getUserDataOnInit();
                     this.signInInitStatus.next(true);
+                    this.userAuthenticationChangeEventDispacher(true);
                     console.log(`authStrategy signInInitStatus - next true`);
                 }
             } catch (error) {
@@ -211,6 +223,7 @@ export class AgentAuthService {
                 if ('status' in error && error.status == 401) {
                     this.sdm.undeclareSignData();
                     this.signInInitStatus.next(false);
+                    // this.userAuthenticationChangeEventDispacher(false);
                     console.log(`authStrategy signInInitStatus - next false`);
                 }
             }

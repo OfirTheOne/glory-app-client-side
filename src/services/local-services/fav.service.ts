@@ -20,7 +20,9 @@ export class FavService {
 
     constructor(
         private authService: AgentAuthService,
-        private favApi: FavApiService) { }
+        private favApi: FavApiService) { 
+            // this.authService.userAuthenticationChangeEventSubscribe()
+        }
 
     // *********** shallow ids *********** //
 

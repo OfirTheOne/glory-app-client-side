@@ -1,11 +1,10 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, ViewController, AlertController } from 'ionic-angular';
-import { Slides } from 'ionic-angular';
+import { IonicPage, ViewController, AlertController, Slides, Loading} from 'ionic-angular';
 
-import { AgentAuthService, CartService, OrderApiService } from '../../../services';
+import { AgentAuthService, CartService, OrderApiService, LoadingService } from '../../../services';
 import { OrderProduct, DeliveryAddress, DeliveryOptions } from './../../../models/order';
 import { CartProduct } from './../../../models/store-models/cart-product.interface';
-import { AccountPage } from '../../account/account';
+
 import { StripeSource } from './../../../models/user-data-base.interface';
 
 @IonicPage()
@@ -31,6 +30,7 @@ export class PaymentPage {
   constructor(
     private viewCtrl: ViewController,
     private alertCtrl: AlertController,
+    private loadingService: LoadingService,
     private authService: AgentAuthService,
     private cartService: CartService,
     private orderApiService: OrderApiService
@@ -40,10 +40,10 @@ export class PaymentPage {
   async ionViewDidLoad() {
     console.log('ionViewDidLoad PaymentPage');
     this.slides.stopAutoplay();
-    this.selectedDeliveryOption = DeliveryOptions.Standard; // defaulte
-    this.deliveryFeed = 5; // defaulte
-    this.existingSources = this.authService.getProfile().paymentMethods.sources;
-    this.address =this.authService.getProfile().address;
+    // this.slides.lockSwipes(true);
+    
+    this.initPaymentViewParameters();
+
     this.products = await this.cartService.getCartProducts();
 
     this.subtotal = this.products.reduce<number>((
@@ -52,7 +52,14 @@ export class PaymentPage {
       ), 0); 
   }
 
-  // slider functionality 
+  private initPaymentViewParameters() {
+    this.selectedDeliveryOption = DeliveryOptions.Standard; // defaulte
+    this.deliveryFeed = 5; // defaulte
+    this.existingSources = this.authService.getProfile().paymentMethods.sources;
+    this.address = this.authService.getProfile().address;
+  }
+
+  // slide functionality 
   public goToSlide(slideIndex) {
     this.slides.slideTo(slideIndex, 500);
   }
@@ -94,14 +101,26 @@ export class PaymentPage {
     orderAlert.onDidDismiss(async (data, role) => {
       if (role == 'cancel') {
         console.log('order chacked');
-
       } else {
-        const orderData = await this.getOrderData();
-        console.log(orderData);
-        const headers = this.authService.getAuthHeader();
-        const resulte = await this.orderApiService.postOrder(headers, orderData);
-        console.log(resulte);
-        console.log('order submited');
+        let loading: Loading;
+        try {
+          const orderData = await this.getOrderData();
+          console.log(orderData);
+          const headers = this.authService.getAuthHeader();
+
+          loading = this.loadingService.presentLoadingAlert('proccess your order')
+
+          const resulte = await this.orderApiService.postOrder(headers, orderData);
+          console.log(resulte);
+          console.log('order submited');
+
+          loading.dismiss();
+          
+        } catch (error) {
+          console.log('order failed');
+          console.log(error);
+          loading.dismiss();
+        }
         this.goToNextSlide();
       }
     });

@@ -1,8 +1,10 @@
 
-// core services
+// core / util services
 import { HttpService } from './api-services/http.service';
 import { EnvironmentService } from "./environment/environment.service";
 import { TabNavService } from "./tab-nav.service";
+import { LoadingService } from "./loading";
+
 
 // api services
 import { OrderApiService } from './api-services/order.api.service';
@@ -27,6 +29,7 @@ import { ProductService } from './local-services/product.service';
 export const servicesArray: any[] = [
     EnvironmentService,
     TabNavService,
+    LoadingService,
     UserApiService,
     GoogleAuthStrategyService,
     FacebookAuthStrategyService,
@@ -46,6 +49,7 @@ export const servicesArray: any[] = [
 export { HttpService } from './api-services/http.service';
 export { EnvironmentService } from "./environment/environment.service";
 export { TabNavService } from "./tab-nav.service";
+export { LoadingService } from "./loading";
 
 // api services
 export { CartApiService } from './api-services/cart-api.service';

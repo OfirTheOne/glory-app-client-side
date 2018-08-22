@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController, Modal, Content, Button, NavOptions } from 'ionic-angular';
+import { IonicPage, NavParams, ModalController, Modal, Content, Button, NavOptions } from 'ionic-angular';
 
 import { AgentAuthService, ProductService, FavService } from './../../../services';
 
@@ -21,8 +21,6 @@ const SCROLL_DEPTH_PIXELS = 35;
   templateUrl: 'items-grid.html',
 })
 export class ItemsGridPage {
-
-
   dispalyProducts: Product[] = [];
   
   view = '';
@@ -33,8 +31,6 @@ export class ItemsGridPage {
   
   wishProductsIds: string[] = [];
   isUserSign = false;
-
-
 
   @ViewChild('pageContent') content: Content;
   @ViewChild('toTopBtn') toTopBtn: Button;
@@ -67,6 +63,8 @@ export class ItemsGridPage {
     if (this.isUserSign) {
       // handle error inside wishService.getWishList()
       this.wishProductsIds = await this.favService.getWishList();
+    } else {
+      this.wishProductsIds  = [];
     }
   }
 

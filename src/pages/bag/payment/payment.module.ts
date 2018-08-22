@@ -5,14 +5,13 @@ import { PaymentPage } from './payment';
 
 @NgModule({
   declarations: [
-    // StripePaymentFormComponent,
-    PaymentPage,
+    PaymentPage
   ],
   imports: [
     IonicPageModule.forChild(PaymentPage),
   ],
   exports: [
-    PaymentPage,
-  ],
+    PaymentPage
+  ]
 })
 export class PaymentPageModule {}

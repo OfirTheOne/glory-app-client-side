@@ -40,6 +40,13 @@ export class MyApp {
       }
     });
 
+    authService.userAuthenticationChangeEventSubscribe((authAuthStatus) => {
+      if(!authAuthStatus) {
+        favService.flushWishService();
+        cartService.flushCartService();
+      }
+    })
+
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
