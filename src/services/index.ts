@@ -20,6 +20,7 @@ import { FacebookAuthStrategyService } from './auth/facebook-auth/facebook-auth.
 import { GoogleAuthStrategyService } from './auth/google-auth/google-auth.service';
 
 // local data services
+import { OrderService } from './local-services/order.service';
 import { CartService } from './local-services/cart.service';
 import { FavService } from './local-services/fav.service';
 import { ProductService } from './local-services/product.service';
@@ -30,16 +31,20 @@ export const servicesArray: any[] = [
     EnvironmentService,
     TabNavService,
     LoadingService,
+
     UserApiService,
     GoogleAuthStrategyService,
     FacebookAuthStrategyService,
     CustomAuthStrategyService,
     AgentAuthService,
     HttpService,
+
     ProductApiService,
     FavApiService,
     CartApiService,
     OrderApiService,
+
+    OrderService,
     ProductService,
     CartService,
     FavService,
@@ -65,6 +70,7 @@ export { FacebookAuthStrategyService } from './auth/facebook-auth/facebook-auth.
 export { GoogleAuthStrategyService } from './auth/google-auth/google-auth.service';
 
 // local data services
+export { OrderService } from './local-services/order.service';
 export { CartService } from './local-services/cart.service';
 export { FavService } from './local-services/fav.service';
 export { ProductService } from './local-services/product.service';

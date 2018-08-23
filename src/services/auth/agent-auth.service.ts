@@ -12,6 +12,8 @@ import { UserDataBase } from './../../models/user-data-base.interface';
 import { AuthResponse } from '../../models/custom-auth-models/auth-response.interface';
 import { Provider } from './../../models/provider.enum';
 
+import { isNullOrUndefined, isStringEmpty, allFiledsAre, not } from '../../utils'
+
 @Injectable()
 export class AgentAuthService {
 
@@ -120,6 +122,10 @@ export class AgentAuthService {
         this.userAuthenticationChangeEvent.next(userAuthenticate);
     }
 
+    public getAuthHeader() {
+        return this.authStrategy ? this.authStrategy.getAuthHeader() : undefined;
+    }
+
     // update the signed in user data and send it to the db.
     public async onUpdateUserData(userData:
         { firstName: string, lastName: string, gender: string, birthDate: any }): Promise<boolean> {
@@ -159,9 +165,20 @@ export class AgentAuthService {
         return this.authStrategy ? this.authStrategy.getProvider() : undefined;
     }
 
-    public getAuthHeader() {
-        return this.authStrategy ? this.authStrategy.getAuthHeader() : undefined;
+    public canUserCheckOut(): boolean {
+        const user = this.getProfile();
+        if(user) {
+            const userAddress = user.address;
+            const result 
+                =  !isNullOrUndefined(userAddress) 
+                && allFiledsAre(userAddress, not(isNullOrUndefined)) 
+                && allFiledsAre(userAddress, not(isStringEmpty))
+                && user.paymentMethods.sources.length > 0;
+            return result;
+
+        }
     }
+ 
 
     // // method used for subscribing to an event the will triger on eny sign user releted action.
     // public userStatusChangeEventSubscribe(callback: () => void): Subscription {

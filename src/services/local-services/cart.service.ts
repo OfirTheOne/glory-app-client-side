@@ -21,11 +21,11 @@ export class CartService {
         private cartApi: CartApiService) { }
 
 
-    public async getCartProducts(): Promise<CartProduct[]> {
+    public async getCartProducts(forceUpdate: boolean = false): Promise<CartProduct[]> {
         try {
             // if pass T.O update wishListProducts
             if (this.authService.isSignIn()) {
-                if (this.shouldeGetUpdatedList(this.lastProductsRequestTimeStamp)) {
+                if (this.shouldeGetUpdatedList(this.lastProductsRequestTimeStamp) || forceUpdate) {
                     const header = this.authService.getAuthHeader()
                     const result = await this.cartApi.getUserCart(header);
                     this.cartProducts = result.data;

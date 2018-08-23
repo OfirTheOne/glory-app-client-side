@@ -13,6 +13,7 @@ import { PaymentPage } from './bag/payment/payment';
 import { BagPage } from './bag/bag';
 import { UserAddressPage } from './account/user-address/user-address';
 import { UserDetailsPage } from './account/user-details/user-details';
+import { UserOrdersPage } from './account/user-orders/user-orders';
 import { PaymentMethodsPage } from './account/payment-methods/payment-methods';
 import { AccountPage } from './account/account';
 import { TabsPage } from './tabs/tabs';
@@ -30,6 +31,7 @@ import { PaymentPageModule } from './bag/payment/payment.module';
 import { BagPageModule } from './bag/bag.module';
 import { UserAddressPageModule } from './account/user-address/user-address.module';
 import { UserDetailsPageModule } from './account/user-details/user-details.module';
+import { UserOrdersPageModule } from './account/user-orders/user-orders.module';
 import { PaymentMethodsPageModule } from './account/payment-methods/payment-methods.module';
 import { AccountPageModule } from './account/account.module';
 
@@ -40,16 +42,19 @@ export const pagesArray: any[] = [
     SignInPage,
     FullImgPage,
     ItemPage,
+
     ItemsGridPage,
     CategoriesPage,
     StoreViewbyPage,
     FavPage,
     PaymentPage,
+
     BagPage,
     UserAddressPage,
     UserDetailsPage,
     PaymentMethodsPage,
     AccountPage,
+    
     TabsPage,
 ];
 
@@ -60,15 +65,19 @@ export const pagesModuleArray: any[] = [
     SignInPageModule,
     FullImgPageModule,
     ItemPageModule,
+    
     ItemsGridPageModule,
     CategoriesPageModule,
     StoreViewbyPageModule,
     FavPageModule,
     PaymentPageModule,
+
     BagPageModule,
     UserAddressPageModule,
     UserDetailsPageModule,
+    UserOrdersPageModule,
     PaymentMethodsPageModule,
+
     AccountPageModule,
 ];
 
@@ -85,6 +94,7 @@ export { PaymentPage } from './bag/payment/payment';
 export { BagPage } from './bag/bag';
 export { UserAddressPage } from './account/user-address/user-address';
 export { UserDetailsPage } from './account/user-details/user-details';
+export { UserOrdersPage } from './account/user-orders/user-orders';
 export { PaymentMethodsPage } from './account/payment-methods/payment-methods';
 export { AccountPage } from './account/account';
 export { TabsPage } from './tabs/tabs';
@@ -103,4 +113,5 @@ export { BagPageModule } from './bag/bag.module';
 export { UserAddressPageModule } from './account/user-address/user-address.module';
 export { UserDetailsPageModule } from './account/user-details/user-details.module';
 export { PaymentMethodsPageModule } from './account/payment-methods/payment-methods.module';
+export { UserOrdersPageModule } from './account/user-orders/user-orders.module';
 export { AccountPageModule } from './account/account.module';

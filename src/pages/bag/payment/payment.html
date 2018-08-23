@@ -80,7 +80,7 @@
 
 
   <!-- *************** Slider / Step Contant *************** -->
-  <ion-slides class="h-80" padding-top #Slides>
+  <ion-slides (ionSlideDidChange)="slideGaurd(slides.getActiveIndex())" class="h-80" padding-top #Slides>
 
     <!-- step 1 - Delivery Details -->
     <ion-slide>
@@ -331,7 +331,7 @@
             <ion-row>
               <ion-col col-12>
                 <button 
-                  ion-button block 
+                  ion-button full 
                   (click)="onSubmitOrder()"
                   class="width-75 mx-auto">Submit Order</button>
               </ion-col>

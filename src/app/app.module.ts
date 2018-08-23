@@ -8,9 +8,6 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 // components
 import { MyApp } from './app.component';
-import { componentsArray, StripePaymentFormComponent } from '../components';
-
-// import { StripePaymentFormModule } from './../components/stripe-payment-form/stripe-payment-form.module';
 
 // pages
 import { 
@@ -25,6 +22,7 @@ import {
   FavPage,
   PaymentPage,
   BagPage,
+  UserOrdersPage,
   UserAddressPage,
   UserDetailsPage,
   PaymentMethodsPage,
@@ -45,6 +43,10 @@ import {
   UserDetailsPageModule,
   PaymentMethodsPageModule,
   AccountPageModule,
+  UserOrdersPageModule,
+  
+  pagesArray,
+  pagesModuleArray,
    } from '../pages';
 import { TabsPage } from '../pages/tabs/tabs';
 
@@ -82,6 +84,7 @@ import { servicesArray } from '../services';
     HttpClientModule,
     IonicModule.forRoot(MyApp),
     
+/*    
     PaymentPageModule,
     AccountPageModule,
     LoadPageModule,
@@ -96,28 +99,35 @@ import { servicesArray } from '../services';
     PaymentMethodsPageModule,
     UserDetailsPageModule,
     UserAddressPageModule,
+    UserOrdersPageModule,
     BagPageModule,
-
-    // ...pagesModuleArray,
-    // ...pagesArray,
+*/
+    ...pagesModuleArray,
   ],
   bootstrap: [IonicApp],
   entryComponents: [
+    ...pagesArray,
+    /*
     LoadPage,
     SignUpPage,
     SignInPage,
     FullImgPage,
     ItemPage,
+
     ItemsGridPage,
     CategoriesPage,
     StoreViewbyPage,
     FavPage,
     PaymentPage,
+    
     BagPage,
     UserAddressPage,
     UserDetailsPage,
+    UserOrdersPage,
     PaymentMethodsPage,
+    
     AccountPage,
+    */
     TabsPage,
     MyApp,
   ],

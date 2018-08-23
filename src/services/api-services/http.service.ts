@@ -26,7 +26,7 @@ export class HttpService {
         }
     }
 
-    async get<T>(queryUrl: string,  headers?: HttpHeaders, params?: HttpParams) {
+    async get<T>(queryUrl: string,  headers?: HttpHeaders, params?: HttpParams): Promise<ServerResponse<T>> {
         let result: HttpResponse<ServerResponse<T>>;
 
         try {

@@ -62,6 +62,9 @@ page-payment {
         ion-navbar {
             max-height: 30px;
             min-height: 30px;
+            .toolbar-background-ios {
+                background: transparent !important;
+            }
         }
 
     }

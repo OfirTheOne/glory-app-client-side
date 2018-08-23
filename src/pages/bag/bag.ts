@@ -44,8 +44,7 @@ export class BagPage {
     this.isUserSign = this.authService.isSignIn();
     try {
       if (this.isUserSign) {
-        this.cart = await this.cartService.getCartProducts();
-        this.totalCartCost = this.cartService.getTotalCost();
+        await this.setCartPageData();
       }
     } catch (e) {
       console.log(e);
@@ -72,6 +71,7 @@ export class BagPage {
     });
   }
 
+  
 
   async removeProductFromCart(cartProduct: CartProduct) {
     try {
@@ -85,29 +85,32 @@ export class BagPage {
     }
   }
 
-
-
-
-  public onChackOut() {
-    if(!this.canUserChackOut()) {
+  public onCheckOut() {
+    if(!this.canUserCheckOut()) {
       this.presentAlert({title: 'Can\'t Cackout', subTitle:'invlide address details' });
     } else if(this.cart.length > 0) {
       const modal = this.presentModal(PaymentPage);
-      modal.onDidDismiss(() => {
+      modal.onWillDismiss(async (orderCompleted: boolean) => {
+        if(orderCompleted) {
+          console.log('Order Completed.');
+          await this.setCartPageData(true);
+        }
         console.log('PurchasePage dismissed.')
       })
     }
 
   }
 
-  private canUserChackOut() : boolean {
+
+
+  private async setCartPageData(forceUpdate?: boolean) {
+    this.cart = await this.cartService.getCartProducts(forceUpdate);
+    this.totalCartCost = this.cartService.getTotalCost();
+  }
+
+  private canUserCheckOut() : boolean {
     if(this.authService.isSignIn()) {
-      const userAddress = this.authService.getProfile().address;
-      
-      const result = !isNullOrUndefined(userAddress) 
-          && allFiledsAre(userAddress, not(isNullOrUndefined)) 
-          && allFiledsAre(userAddress, not(isStringEmpty));
-      return result;
+      return this.authService.canUserCheckOut();
     } else {
       return false;
     }

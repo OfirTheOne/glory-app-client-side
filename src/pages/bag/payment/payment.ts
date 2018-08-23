@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { IonicPage, ViewController, AlertController, Slides, Loading} from 'ionic-angular';
 
-import { AgentAuthService, CartService, OrderApiService, LoadingService } from '../../../services';
+import { AgentAuthService, CartService, OrderService, LoadingService } from '../../../services';
 import { OrderProduct, DeliveryAddress, DeliveryOptions } from './../../../models/order';
 import { CartProduct } from './../../../models/store-models/cart-product.interface';
 
@@ -27,20 +27,21 @@ export class PaymentPage {
   private selectedPaymentMethod: string;
   private selectedSource: StripeSource;
 
+  private orderCompleted = false;
   constructor(
     private viewCtrl: ViewController,
     private alertCtrl: AlertController,
     private loadingService: LoadingService,
     private authService: AgentAuthService,
     private cartService: CartService,
-    private orderApiService: OrderApiService
+    private orderService: OrderService
   ) {
    }
 
   async ionViewDidLoad() {
     console.log('ionViewDidLoad PaymentPage');
     this.slides.stopAutoplay();
-    // this.slides.lockSwipes(true);
+    this.slides.lockSwipes(true);
     
     this.initPaymentViewParameters();
 
@@ -67,10 +68,16 @@ export class PaymentPage {
   public goToNextSlide() {
     const slideIndex = this.slides.getActiveIndex();
     if(this.validateSlideToNext(slideIndex)) {
+      this.slides.lockSwipes(false);
       this.slides.slideNext(500);
+      this.slides.lockSwipeToNext(true);
     }
   }
 
+  public slideGaurd(index) {
+    console.log(index);
+  }
+  
   private validateSlideToNext(slideIndex: number) {
     switch (slideIndex) {
       case 0:
@@ -102,24 +109,22 @@ export class PaymentPage {
       if (role == 'cancel') {
         console.log('order chacked');
       } else {
-        let loading: Loading;
         try {
           const orderData = await this.getOrderData();
           console.log(orderData);
-          const headers = this.authService.getAuthHeader();
-
-          loading = this.loadingService.presentLoadingAlert('proccess your order')
-
-          const resulte = await this.orderApiService.postOrder(headers, orderData);
-          console.log(resulte);
-          console.log('order submited');
-
-          loading.dismiss();
           
+          const loading = this.loadingService.presentLoadingAlert('proccess your order')
+          const requestSuccessed = await this.orderService.postOrder(orderData);
+          loading.dismiss();
+          console.log(requestSuccessed);
+          if(!requestSuccessed) {
+            throw new Error(); 
+          }
+          console.log('order submited');
+          this.orderCompleted = true;
         } catch (error) {
           console.log('order failed');
           console.log(error);
-          loading.dismiss();
         }
         this.goToNextSlide();
       }
@@ -186,6 +191,6 @@ export class PaymentPage {
   }
 
   public onExit() {
-    this.viewCtrl.dismiss();
+    this.viewCtrl.dismiss(this.orderCompleted);
   }
 }
