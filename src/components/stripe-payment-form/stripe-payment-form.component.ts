@@ -1,17 +1,13 @@
 import { 
-    Component, 
-    OnInit, 
-    ViewChild, 
-    ElementRef, 
-    Output, 
-    Input, 
+    Component, OnInit, ViewChild,
+    ElementRef, Output, Input, 
     EventEmitter 
 } from '@angular/core';
+import { EnvironmentService } from '../../services';
 
 
 
 declare var Stripe;
-const stripeTestKey = 'pk_test_qe0umqOpJ81LK97pWL0x1k8J';
 
 @Component({
     selector: 'app-stripe-payment-form',
@@ -19,7 +15,7 @@ const stripeTestKey = 'pk_test_qe0umqOpJ81LK97pWL0x1k8J';
 })
 
 export class StripePaymentFormComponent implements OnInit {
-    stripe = Stripe(stripeTestKey);
+    stripe: any; 
     card: any;
 
     @Input() paymentData: { amount: number, owner: { [key: string]: any } };
@@ -32,6 +28,10 @@ export class StripePaymentFormComponent implements OnInit {
     @ViewChild('cardElement') cardElementRef: ElementRef;
     @ViewChild('cardErrors') cardErrorsRef: ElementRef;
 
+
+    constructor(envService: EnvironmentService) {
+        this.stripe = Stripe(envService.get('STRIPE_TEST_KEY'));
+     }
 
     ngOnInit() {
         console.log('ngOnInit StripeJsComponent');
@@ -90,7 +90,6 @@ export class StripePaymentFormComponent implements OnInit {
         });
 
     }
-
 
     private setSourceData(): Object {
         const staticSourceData = {

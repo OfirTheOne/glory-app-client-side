@@ -9,28 +9,15 @@ import { loaderContant, LoaderType } from './load-content';
 @Injectable()
 export class LoadingService {
     constructor(
-        @Inject(ModalController) private modalCtrl: ModalController,
-        @Inject(LoadingController) private loadingCtrl: LoadingController) { }
+    @Inject(ModalController) private modalCtrl: ModalController,
+    @Inject(LoadingController) private loadingCtrl: LoadingController) { }
 
-    // currentDisplayedModal: Modal;
-
+ 
     public presentsLoadPage(loadPage): Modal {
         const modal = this.modalCtrl.create(loadPage);
         modal.present();
         return modal;
     }
-
-    // public DismissLoadPage() {
-    //     if(this.isLoadingModalDisplayed()) {
-    //         this.currentDisplayedModal.dismiss();
-    //         this.currentDisplayedModal = undefined;
-    //     }
-    // }
-
-    // private isLoadingModalDisplayed() {
-    //     return this.currentDisplayedModal && this.currentDisplayedModal.isOverlay;
-    // }
-
 
     public presentLoadingAlert(text?: string, loaderType: LoaderType = LoaderType.Clip_Rotate): Loading {
         const contant = this.getLoaderContantByType(loaderType)

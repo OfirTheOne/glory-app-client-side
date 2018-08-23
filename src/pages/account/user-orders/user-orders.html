@@ -9,20 +9,17 @@
     <h2 class="orders-title" text-center>Your Orders</h2>
     <hr>
 
-    <div *ngIf="(orders$ | async) as orders; else noOrders" >
+    <!-- waite for orders request -->
+    <div *ngIf="(orders$ | async) as orders">
+        <!-- no orders -->
+        <h4 *ngIf="orders.length == 0" text-center> No Orders ... </h4>
 
-
-    
-    <ion-card *ngFor="let order of orders"> 
-      
-        <ion-card-content>
-            Total : {{order.total}}, No. products : {{order.orderProducts.length}}
-        </ion-card-content>
-      
-      </ion-card>
+        <!-- have orders -->
+        <ion-card *ngFor="let order of orders">   
+            <ion-card-content>
+                Total : {{order.total}}, No. products : {{order.orderProducts.length}}, Date: {{order.date | date}}
+            </ion-card-content>
+        </ion-card>
     </div>
 
-    <ng-template #noOrders>
-        <h3 text-center> no orders ... </h3>
-    </ng-template>
 </ion-content>

@@ -23,7 +23,7 @@ export class UserOrdersPage {
 
     async ionViewDidLoad() {
         const loading = this.loadingService.presentLoadingAlert();
-        const orderRes = await this.orders$; // = await this.orderService.getOrders();
+        const orderRes = await this.orders$;
         console.log(orderRes);
         loading.dismiss();
     }

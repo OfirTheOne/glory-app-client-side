@@ -35,7 +35,6 @@ export class StoreViewbyPage {
   }
 
   public onViewBySelected(index, view) {
-    console.log(view);
     this.selectedViewIndex = index;
     
     setTimeout(()=>{
@@ -45,7 +44,6 @@ export class StoreViewbyPage {
   }
 
 public and(boolA, boolB) {
-  console.log(this.selectedViewIndex);
   return boolA && boolB;
 } 
 

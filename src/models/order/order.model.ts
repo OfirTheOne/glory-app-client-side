@@ -13,4 +13,5 @@ export interface Order {
     paymentDetails: {
         paymentMethod: string
     },
+    date: number
 }
