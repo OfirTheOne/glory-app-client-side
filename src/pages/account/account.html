@@ -68,11 +68,11 @@
         <ion-col>
 
           <ion-list class="account-menu-list">
-            <button class="account-menu-item" ion-item>
+            <button class="account-menu-item" ion-item (click)="onGotoOrdersPage()">
               <ion-icon name="clipboard" item-start></ion-icon>
               <h3>My orders</h3>
             </button>
-
+            
             <button ion-item (click)="onGotoDetailsPage()" >
               <ion-icon name="list" item-start></ion-icon>
               <h3>My details</h3>

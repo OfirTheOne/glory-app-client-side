@@ -36,9 +36,9 @@ export class LoadingService {
         const contant = this.getLoaderContantByType(loaderType)
         const loading = this.loadingCtrl.create({
           spinner: 'hide',
-          content: 
-          `${contant}
-          <p class="text-center">${text}</p>`,
+          content: contant + (text? 
+           `<p class="text-center">${text}</p>` :
+           ''),
         });
         loading.present();
         return loading;

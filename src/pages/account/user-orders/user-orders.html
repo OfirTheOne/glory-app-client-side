@@ -6,5 +6,23 @@
 
 
 <ion-content padding>
+    <h2 class="orders-title" text-center>Your Orders</h2>
+    <hr>
 
+    <div *ngIf="(orders$ | async) as orders; else noOrders" >
+
+
+    
+    <ion-card *ngFor="let order of orders"> 
+      
+        <ion-card-content>
+            Total : {{order.total}}, No. products : {{order.orderProducts.length}}
+        </ion-card-content>
+      
+      </ion-card>
+    </div>
+
+    <ng-template #noOrders>
+        <h3 text-center> no orders ... </h3>
+    </ng-template>
 </ion-content>

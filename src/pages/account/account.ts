@@ -7,6 +7,7 @@ import { SignUpPage } from '../auth/sign-up/sign-up';
 
 import { UserDetailsPage } from './user-details/user-details';
 import { UserAddressPage } from './user-address/user-address';
+import { UserOrdersPage } from './user-orders/user-orders';
 import { PaymentMethodsPage } from './payment-methods/payment-methods';
 
 import { AgentAuthService } from '../../services/auth/agent-auth.service';
@@ -74,6 +75,12 @@ export class AccountPage {
   public onGotoAddressPage() {
     this.goToPage(UserAddressPage);
   }
+
+  public onGotoOrdersPage() {
+    this.goToPage(UserOrdersPage);
+  }
+
+  
 
   public onGotoPaymentMethodPage() {
     this.goToPage(PaymentMethodsPage);
