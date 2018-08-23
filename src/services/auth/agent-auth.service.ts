@@ -165,19 +165,7 @@ export class AgentAuthService {
         return this.authStrategy ? this.authStrategy.getProvider() : undefined;
     }
 
-    public canUserCheckOut(): boolean {
-        const user = this.getProfile();
-        if(user) {
-            const userAddress = user.address;
-            const result 
-                =  !isNullOrUndefined(userAddress) 
-                && allFiledsAre(userAddress, not(isNullOrUndefined)) 
-                && allFiledsAre(userAddress, not(isStringEmpty))
-                && user.paymentMethods.sources.length > 0;
-            return result;
 
-        }
-    }
  
 
     // // method used for subscribing to an event the will triger on eny sign user releted action.

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { FormGroup, FormControl } from '@angular/forms';
 
-import { AgentAuthService, UserApiService } from '../../../services';
+import { AgentAuthService, UserApiService, LoadingService } from '../../../services';
 
 /**
  * Generated class for the UserAddressPage page.
@@ -24,6 +24,7 @@ export class UserAddressPage {
   constructor(
     private authService: AgentAuthService,
     private userApi: UserApiService,
+    private loadingService: LoadingService,
     public navCtrl: NavController,
     public navParams: NavParams) {
 
@@ -38,11 +39,9 @@ export class UserAddressPage {
 
 
   ionViewDidLoad() {
-    setTimeout(async () => {
+    setTimeout(() => {
       console.log('ionViewDidLoad UserAddressPage');
-      const user = this.authService.getProfile();
-      this.resetFormToActualUserData(user.address);
-      this.setFiledsState(false);
+      this.initForm();
     });
   }
 
@@ -58,15 +57,26 @@ export class UserAddressPage {
           postcode: this.userAddressForm.value['postcode'],
         }
       }
+      const loading = this.loadingService.presentLoadingAlert();
       try {
         const result = await this.userApi.postUserData(headers, { data })
         console.log(result)
         this.authService.updateUserOnPostUserDataRequest(result);
+        loading.dismiss();
       } catch (error) {
-        console.log(error)
+        console.log(error);
+        loading.dismiss();
+        this.initForm();
       }
     }
   }
+  
+  private initForm() {
+    const user = this.authService.getProfile();
+    this.resetFormToActualUserData(user.address);
+    this.setFiledsState(false);
+  }
+
 
   public onEditModeToggle() {
     const currentEditMode = this.editMode;

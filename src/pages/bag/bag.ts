@@ -73,7 +73,7 @@ export class BagPage {
 
   
 
-  async removeProductFromCart(cartProduct: CartProduct) {
+  public async removeProductFromCart(cartProduct: CartProduct) {
     try {
       if (this.isUserSign) {
         console.log(cartProduct);
@@ -86,8 +86,9 @@ export class BagPage {
   }
 
   public onCheckOut() {
-    if(!this.canUserCheckOut()) {
-      this.presentAlert({title: 'Can\'t Cackout', subTitle:'invlide address details' });
+    const checkoutStatus = this.canUserCheckOut(); 
+    if(!checkoutStatus.pass) {
+      this.presentAlert({title: 'Can\'t Ceckout', subTitle: checkoutStatus.alertMessage });
     } else if(this.cart.length > 0) {
       const modal = this.presentModal(PaymentPage);
       modal.onWillDismiss(async (orderCompleted: boolean) => {
@@ -108,11 +109,35 @@ export class BagPage {
     this.totalCartCost = this.cartService.getTotalCost();
   }
 
-  private canUserCheckOut() : boolean {
+  // return the validation value in 'pass', and the message to present 
+  // in case the user can'ot checkout.
+  private canUserCheckOut() : {pass: boolean, alertMessage: string } {
     if(this.authService.isSignIn()) {
-      return this.authService.canUserCheckOut();
+
+        const user = this.authService.getProfile();
+        if(user) {
+            const userAddress = user.address;
+            const validAddress 
+                =  !isNullOrUndefined(userAddress) 
+                && allFiledsAre(userAddress, not(isNullOrUndefined)) 
+                && allFiledsAre(userAddress, not(isStringEmpty))
+
+            const validPayMethod = user.paymentMethods.sources.length > 0;
+            if(validAddress && validPayMethod) {
+              return {pass: true, alertMessage: ''}
+            } else {
+              return {
+                pass: false, 
+                alertMessage: 
+                  `${validAddress? '' : 'invlide address details.'}` + 
+                  `${validPayMethod? '' : '\ninvlide payment details.'}` 
+              }
+            }
+
+        }
+    
     } else {
-      return false;
+      return {pass: false, alertMessage: 'unauthorized.'  };
     }
     
   }

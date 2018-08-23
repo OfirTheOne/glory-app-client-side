@@ -1,7 +1,6 @@
-import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, RadioGroup, RadioButton } from 'ionic-angular';
-import { NgForm, FormGroup, FormControl, Validators } from '@angular/forms';
-import { UserApiService, AgentAuthService, OrderService, LoadingService } from '../../../services';
+import { Component } from '@angular/core';
+import { IonicPage } from 'ionic-angular';
+import { AgentAuthService, OrderService, LoadingService } from '../../../services';
 import { Order } from '../../../models/order';
 
 @IonicPage()
@@ -22,9 +21,11 @@ export class UserOrdersPage {
     }
 
     async ionViewDidLoad() {
-        const loading = this.loadingService.presentLoadingAlert();
-        const orderRes = await this.orders$;
-        console.log(orderRes);
-        loading.dismiss();
+        if(this.authService.isSignIn()) {
+            const loading = this.loadingService.presentLoadingAlert();
+            const orderRes = await this.orders$;
+            console.log(orderRes);
+            loading.dismiss();
+        }
     }
 }
