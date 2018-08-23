@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
-import { AgentAuthService, UserApiService } from '../../../services';
+import { AgentAuthService, LoadingService } from '../../../services';
 
 @IonicPage()
 @Component({
@@ -16,7 +16,7 @@ export class PaymentMethodsPage {
 
   constructor(
     private authService: AgentAuthService,
-    private userApi: UserApiService,
+    private loadingService: LoadingService,
     public navCtrl: NavController, 
     public navParams: NavParams) {
   }
@@ -38,11 +38,14 @@ export class PaymentMethodsPage {
   public async onCardSubmited(source) {
     console.log(source);
     if (this.authService.isSignIn()) {
+      const loading = this.loadingService.presentLoadingAlert();
       try {
         const result = await this.authService.onAddPaymentMethod(source);
-        console.log('request resulte: ', result);
-        console.log('updated user: ', this.authService.getProfile());
+        loading.dismiss();
+        const user = this.authService.getProfile();
+        this.existingSources = user.paymentMethods.sources; 
       } catch (error) {
+        loading.dismiss();
         console.log(error)
       }
       
